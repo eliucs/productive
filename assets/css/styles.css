@@ -40,8 +40,9 @@ html, body {
 /* Add Button */
 .add-container {
     position: fixed;
-    bottom: 2.5em;
-    left: 37em;
+    width: 100%;
+    text-align: center;
+    bottom: 4.5em;
 }
 
 .add-container a {
@@ -108,7 +109,7 @@ html, body {
 /* Weather */
 .weather-container {
     position: fixed;
-    left: 57em;
+    right: 7em;
     bottom: 3em;
 }
 
