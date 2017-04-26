@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <title>Productive</title>
 
+    <link rel="stylesheet" href="assets/img/weather-icons/pe-icon-7-weather/css/pe-icon-7-weather.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
     <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="assets/js/region.js"></script>
+    <script src="assets/js/location.js"></script>
+    <script src="assets/js/script.js"></script>
+
 </head>
 <body>
     <div class="main-container">
@@ -26,10 +33,9 @@
         <div class="add-container"><a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
 
         <div class="weather-container">
-            <div class="weather"><span></span>20&deg;</div>
-            <div class="location">Toronto, ON</div>
+            <div class="weather">20&deg;<span class="pe-7w-rain-alt pe-3x pe-va"></span></div>
+            <div id="location" class="location">City, Region</div>
         </div>
-
 
         <!-- Top Section -->
         <div class="tabs-container">
