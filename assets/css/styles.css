@@ -16,13 +16,10 @@ html, body {
     background-size: cover;
 }
 
-/* Add 
-
-
 /* Datetime */
 .datetime-container {
     position: fixed;
-    left: 10%;
+    left: 7em;
     bottom: 3em;
 }
 
@@ -40,11 +37,81 @@ html, body {
     color: #fff;
 }
 
+/* Add Button */
+.add-container {
+    position: fixed;
+    bottom: 2.5em;
+    left: 37em;
+}
 
-/* Tabs Container */
+.add-container a {
+    font-size: 4em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.add-container a:hover {
+    color: #ffbe2b;
+}
+
+/* Option Button */
+.option-container {
+    position: fixed;
+    bottom: 9.5em;
+    left: 1em;
+}
+
+.option-container a {
+    font-size: 2.5em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.option-container a:hover {
+    color: #ffbe2b;
+}
+
+/* Star Button */
+.star-container {
+    position: fixed;
+    bottom: 6em;
+    left: 1em;
+}
+
+.star-container a {
+    font-size: 2.5em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.star-container a:hover {
+    color: #ffbe2b;
+}
+
+/* Info Button */
+.info-container {
+    position: fixed;
+    bottom: 2.5em;
+    left: 1em;
+}
+
+.info-container a {
+    font-size: 2.5em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.info-container a:hover {
+    color: #ffbe2b;
+}
+
+
+
+
+
 .tabs-container {
     position: fixed;
-    left: 10%;
+    left: 7.5em;
     top: 2em;
 }
 
@@ -57,11 +124,28 @@ html, body {
     color: #fff;
 }
 
+.quick-access-container {
+    position: absolute;
+    left: 40em;
+    top: 2em;
+    width: 99em;
+    overflow-x: hidden;
+}
+
+.quick-access-container h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Mono", monospace;
+    font-size: 2em;
+    font-weight: 500;
+    color: #fff;
+}
+
 
 /* Tasks */
 .tasks-container {
     position: fixed;
-    left: 10%;
+    left: 7.5em;
     top: 5em;
     z-index: 99;
     background-color: #000000;
