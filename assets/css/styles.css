@@ -105,6 +105,30 @@ html, body {
     color: #ffbe2b;
 }
 
+/* Weather */
+.weather-container {
+    position: fixed;
+    left: 60em;
+    bottom: 3em;
+}
+
+.weather {
+    font-family: "Roboto Mono", monospace;
+    font-size: 15vh;
+    font-weight: 500;
+    color: #fff;
+}
+
+.location {
+    font-family: "Roboto Mono", monospace;
+    font-size: 4vh;
+    font-weight: 500;
+    color: #fff;
+}
+
+
+
+
 
 
 
