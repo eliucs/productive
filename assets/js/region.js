@@ -1,4 +1,4 @@
-function getRegionName(regionName) {
+function getRegionCode(regionName) {
     switch (regionName) {
         case 'Ontario':
             return 'ON';
