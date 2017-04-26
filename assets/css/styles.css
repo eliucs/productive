@@ -9,29 +9,35 @@ html, body {
     position: fixed;
     margin: 0;
     padding: 0;
-    background-image: url();
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/wp-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
+/* Add 
 
 
 /* Datetime */
 .datetime-container {
     position: fixed;
     left: 10%;
-    bottom: 10%;
+    bottom: 3em;
 }
 
 .time {
-    font-family: "Helvetica Neue";
+    font-family: "Roboto Mono", monospace;
     font-size: 15vh;
     font-weight: 500;
-    color: #000000;
+    color: #fff;
 }
 
 .date {
-    font-family: "Helvetica Neue";
+    font-family: "Roboto Mono", monospace;
     font-size: 4vh;
     font-weight: 500;
-    color: #000000;
+    color: #fff;
 }
 
 
@@ -39,16 +45,16 @@ html, body {
 .tabs-container {
     position: fixed;
     left: 10%;
-    top: 1.25em;
+    top: 2em;
 }
 
 .tabs-container h1 {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue";
+    font-family: "Roboto Mono", monospace;
     font-size: 2em;
     font-weight: 500;
-    color: #000000;
+    color: #fff;
 }
 
 
@@ -56,10 +62,10 @@ html, body {
 .tasks-container {
     position: fixed;
     left: 10%;
-    top: 4em;
+    top: 5em;
     z-index: 99;
     background-color: #000000;
-    opacity: 0.8;
+    opacity: 0.75;
     border-radius: 10px;
     width: 400px;
     height: 350px;
