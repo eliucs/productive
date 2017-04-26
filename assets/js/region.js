@@ -30,6 +30,15 @@ function getRegionName(regionName) {
         case 'Newfoundland and Labrador':
             return 'NB';
             break;
+        case 'Northwest Territories':
+            return 'NT';
+            break;
+        case 'Yukon':
+            return 'YT';
+            break;
+        case 'Nunavut':
+            return 'NU';
+            break;
         default:
             return regionName.substr(0, 2).toUpperCase();
             break;
