@@ -89,6 +89,7 @@ html, body {
     color: #ffbe2b;
 }
 
+
 /* Info Button */
 .info-container {
     position: fixed;
@@ -128,7 +129,29 @@ html, body {
 }
 
 
+@media all and (max-height: 575px) {
+    .datetime-container {
+        display: none;
+    }
 
+    .add-container {
+        display: none;
+    }
+
+    .weather-container {
+        display: none;
+    }
+}
+
+@media all and (max-width: 920px) {
+    .weather-container {
+        display: none;
+    }
+
+    .add-container {
+        display: none;
+    }
+}
 
 
 

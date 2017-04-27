@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $.simpleWeather({
         location: 'Toronto, ON',
         woeid: '',
@@ -8,7 +9,7 @@ $(document).ready(function() {
             code = parseInt(weather.code);
             condition = '';
 
-            console.log(typeof code);
+            console.log(code);
 
             if (code >= 0 && code <= 2) {
                 condition += '<span class="pe-7w-hurricane pe-3x pe-va"></span>';
@@ -24,7 +25,7 @@ $(document).ready(function() {
                 condition += '<span class="pe-7w-rain-alt pe-3x pe-va"></span>';
             } else if (code >= 13 && code <= 16 || code === 25 || code === 41 || code === 42 || code === 43 || code === 46) {
                 condition += '<span class="pe-7w-snow-alt pe-3x pe-va"></span>';
-            } else if (code >= 19 || code <= 23) {
+            } else if (code >= 19 && code <= 23) {
                 condition += '<span class="pe-7w-fog pe-3x pe-va"></span>';
             } else if (code === 24) {
                 condition += '<span class="pe-7w-wind pe-3x pe-va"></span>';
