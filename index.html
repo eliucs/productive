@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="assets/js/region.js"></script>
-    <script src="assets/js/location.js"></script>
-    <script src="assets/js/weather.js"></script>
-    <script src="assets/js/weather-local.js"></script>
+    <!--<script src="assets/js/region.js"></script>-->
+    <!--<script src="assets/js/location.js"></script>-->
+    <!--<script src="assets/js/weather.js"></script>-->
+    <!--<script src="assets/js/weather-local.js"></script>-->
+    <!--<script src="assets/js/script.js"></script>-->
     <script src="assets/js/time.js"></script>
-    <script src="assets/js/script.js"></script>
 
 </head>
 <body>
@@ -23,8 +23,8 @@
 
         <!-- Bottom Section -->
         <div class="datetime-container">
-            <div class="time">0:00</div>
-            <div class="date"></div>
+            <div id="time" class="time"></div>
+            <div id="date" class="date"><script src="assets/js/datetime.js">getDateText();</script></div>
         </div>
 
         <div class="option-container"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
