@@ -12,7 +12,7 @@
   $.extend({
     simpleWeather: function(options){
       options = $.extend({
-        location: getFullRegionName(),
+        location: city + ", " + regionName,
         woeid: '',
         unit: 'c',
         success: function(weather){},

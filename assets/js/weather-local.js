@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $.simpleWeather({
-        location: 'Toronto, ON',
+        location: "Toronto, ON",
         woeid: '',
         unit: 'c',
         success: function(weather) {
@@ -13,7 +13,8 @@ $(document).ready(function() {
 
             if (code >= 0 && code <= 2) {
                 condition += '<span class="pe-7w-hurricane pe-3x pe-va"></span>';
-            } else if (code === 3 || code === 4 || code === 37 || code === 38 || code == 39 || code === 45 || code === 47) {
+            } else if (code === 3 || code === 4 || code === 37 || code === 38 ||
+                code == 39 || code === 45 || code === 47) {
                 condition += '<span class="pe-7w-lightning-rain pe-3x pe-va"></span>';
             } else if (code === 5 || code === 6) {
                 condition += '<span class="pe-7w-snow pe-3x pe-va"></span>';
@@ -23,7 +24,8 @@ $(document).ready(function() {
                 condition += '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
             } else if (code === 11 || code === 12 || code === 40) {
                 condition += '<span class="pe-7w-rain-alt pe-3x pe-va"></span>';
-            } else if (code >= 13 && code <= 16 || code === 25 || code === 41 || code === 42 || code === 43 || code === 46) {
+            } else if (code >= 13 && code <= 16 || code === 25 || code === 41 ||
+                code === 42 || code === 43 || code === 46) {
                 condition += '<span class="pe-7w-snow-alt pe-3x pe-va"></span>';
             } else if (code >= 19 && code <= 23) {
                 condition += '<span class="pe-7w-fog pe-3x pe-va"></span>';
