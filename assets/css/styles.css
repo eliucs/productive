@@ -124,7 +124,7 @@ html, body {
     color: #fff;
 }
 
-@media all and (max-height: 575px) {
+@media all and (max-height: 610px) {
     .datetime-container {
         display: none;
     }

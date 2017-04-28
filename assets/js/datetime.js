@@ -32,7 +32,7 @@ $(document).ready(function() {
     /**
      * updateDate changes the date div element to the current date
      *
-     * @returns {string} The date formatted in Month Day, Year format
+     * @returns {String} The date formatted in Month Day, Year format
      */
     function updateDate() {
         var monthNames = ["January", "February", "March", "April", "May", "June",
