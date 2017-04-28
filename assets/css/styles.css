@@ -16,7 +16,6 @@ html, body {
     background-size: cover;
 }
 
-/* Datetime */
 .datetime-container {
     position: fixed;
     left: 7em;
@@ -37,7 +36,6 @@ html, body {
     color: #fff;
 }
 
-/* Add Button */
 .add-container {
     position: fixed;
     width: 100%;
@@ -55,11 +53,11 @@ html, body {
     color: #ffbe2b;
 }
 
-/* Option Button */
 .option-container {
     position: fixed;
     bottom: 9.5em;
     left: 1em;
+    z-index: 99;
 }
 
 .option-container a {
@@ -72,11 +70,11 @@ html, body {
     color: #ffbe2b;
 }
 
-/* Star Button */
 .star-container {
     position: fixed;
     bottom: 6em;
     left: 1em;
+    z-index: 99;
 }
 
 .star-container a {
@@ -89,12 +87,11 @@ html, body {
     color: #ffbe2b;
 }
 
-
-/* Info Button */
 .info-container {
     position: fixed;
     bottom: 2.5em;
     left: 1em;
+    z-index: 99;
 }
 
 .info-container a {
@@ -107,7 +104,6 @@ html, body {
     color: #ffbe2b;
 }
 
-/* Weather */
 .weather-container {
     position: fixed;
     right: 7em;
@@ -128,7 +124,6 @@ html, body {
     color: #fff;
 }
 
-/*
 @media all and (max-height: 575px) {
     .datetime-container {
         display: none;
@@ -152,7 +147,10 @@ html, body {
         display: none;
     }
 }
-*/
+
+
+
+
 
 
 
