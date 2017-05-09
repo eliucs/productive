@@ -10,6 +10,7 @@ $(document).ready(function() {
         var time = new Date();
         var hour = time.getHours();
         var ampm = hour >= 12 ? 'PM' : 'AM';
+        hour = hour >= 12 ? hour - 12 : hour;
         var min = time.getMinutes();
         min = timeAppendZero(min);
         $("#time").html(hour + ':' + min + ' ' + ampm);
@@ -45,12 +46,30 @@ $(document).ready(function() {
         }
     });
 
-    $('#notifications-tab').click(function() {
-        $('#notifications-container').css('display', 'block');
-        $('#task-container').css('display', 'block');
-        $('#notes-container').css('display', 'block');
-        $('#analytics-container').css('display', 'block');
+    $.get('http://freegeoip.net/json/', function(response) {
+        var city = response.city;
+        var regionName = getRegionCode(response.region_name);
+        $('#location').html(city + ", " + regionName);
+    }, 'jsonp');
+
+
+    $('#manage').click(function() {
+        $('.manage-container').css('display', 'block');
     });
 
-    
+
+    $('#link-button').click(function() {
+        var newLinkURL = $('#link-url').val();
+        var newLinkTitle = $('#link-title').val();
+        var newLinkDesc = $('#link-desc').val();
+
+        if (newLinkURL && newLinkTitle && newLinkDesc) {
+            console.log(SUCCESS_NEW_LINK_URL + newLinkURL);
+            console.log(SUCCESS_NEW_LINK_TITLE + newLinkTitle);
+            console.log(SUCCESS_NEW_LINK_DESC + newLinkDesc);
+        } else {
+            console.log(ERROR_NEW_LINK);
+        }
+    });
+
 });

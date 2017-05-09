@@ -26,8 +26,11 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <!-- Bootstrap Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- SimpleWeather 3.1.0 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
     <!-- Custom Script -->
     <script type="text/javascript" src="assets/js/string.js"></script>
+    <script type="text/javascript" src="assets/js/location.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
 </head>
 
@@ -228,7 +231,7 @@
                         <div class="col-md-12 option-container"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 option-container"><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></div>
+                        <div class="col-md-12 option-container"><a href="https://chrome.google.com/webstore/category/extensions"><i class="fa fa-star-o" aria-hidden="true"></i></a></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 option-container"><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i></a></div>
@@ -254,7 +257,7 @@
 
             <!-- Manage Links -->
             <div class="col-md-2">
-                <div class="access-add-button">Manage Links</div>
+                <div id="manage" class="access-add-button">Manage Links</div>
             </div>
 
             <!-- Weather and Location -->
@@ -262,13 +265,77 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="weather" class="weather-container">15&deg;C</div>
+                            <div id="weather" class="weather-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="location" class="location-container">Toronto, ON</div>
+                            <div id="location" class="location-container">City, Region</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Manage Section -->
+    <section class="manage-container">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- Manage Area Section -->
+                <div class="col-md-12 manage-area-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="manage-title">Manage Links</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <!-- Input New Link Details -->
+                            <div class="row">
+                                <div class="col-md-3"><div class="new-link-title">Link URL</div></div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input id="link-url" type="text" class="form-control new-link-bar" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"><div class="new-link-title">Link Title</div></div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input id="link-title" type="text" class="form-control new-link-bar" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"><div class="new-link-title">Link Description</div></div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input id="link-desc" type="text" class="form-control new-link-bar" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+                                    <button id="link-button" class="btn btn-default new-link-button">Add</button>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
             </div>

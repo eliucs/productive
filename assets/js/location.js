@@ -1,30 +1,6 @@
-var city = '';
-var regionName = '';
-var fullRegionName = ''
-
-$(document).ready(function() {
-
-    $.get("http://freegeoip.net/json/", function (response) {
-        $("#location").html(response.city + ", " + getRegionCode(response.region_name));
-        city = response.city;
-        regionName = response.region_name;
-        fullRegionName = city + ", " + regionName;
-    }, "json");
-
-});
-
-/**
- * getFullRegionName returns the location
- *
- * @returns {string} the location in City, Region format
- */
-function getFullRegionName () {
-    return city + ", " + regionName;
-}
-
 /**
  * getRegionCode returns the province/territory/state's region code
- * NOTE: needs to be phased to use third party library to get
+ * NOTE: needs to be phased out eventually to use third party library to get
  * all international region codes
  *
  * @param {String} regionName - the name of the province/territory/state

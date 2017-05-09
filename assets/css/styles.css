@@ -138,7 +138,7 @@ html, body {
 
 .access-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-weight: 200;
+    font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
     color: #fff;
@@ -148,7 +148,7 @@ html, body {
     margin-top: 1em;
     padding: 0.1em;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-weight: 200;
+    font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
     color: #fff;
@@ -207,11 +207,11 @@ html, body {
 
 /* Option Bar, Date, Time, Weather, Location Styles */
 .secondary-section {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .option-container {
-    padding-top: 0.25em;
+    padding-top: 0;
     font-size: 2em;
 }
 
@@ -230,7 +230,7 @@ html, body {
 
 .time-container {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-weight: 700;
+    font-weight: 100;
     font-style: normal;
     font-size: 5em;
     color: #fff;
@@ -240,7 +240,7 @@ html, body {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
     font-style: normal;
-    font-size: 2em;
+    font-size: 1.25em;
     color: #fff;
 }
 
@@ -260,4 +260,72 @@ html, body {
     font-size: 2em;
     color: #fff;
     text-align: right;
+}
+
+
+/* Manage Section Styles */
+.manage-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 99;
+    display: block;
+}
+
+.manage-area-container {
+    height: 9999em;
+    background-color: #fff;
+    opacity: 0.9;
+    overflow-y: hidden;
+}
+
+@media all and (max-width: 425px) {
+    .manage-title {
+        font-size: 3.5em !important;
+    }
+}
+
+.manage-title {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 5em;
+    color: #222;
+    text-align: center;
+}
+
+@media all and (max-width: 992px) {
+    .new-link-title {
+        text-align: left !important;
+    }
+}
+
+.new-link-title {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.3em;
+    color: #222;
+    text-align: right;
+}
+
+.new-link-bar {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
+    color: #222;
+}
+
+.new-link-button {
+    padding-left: 2em;
+    padding-right: 2em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
+    color: #222;
 }
