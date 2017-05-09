@@ -51,6 +51,8 @@ html, body {
     overflow: hidden;
 }
 
+
+/* Search Styles */
 .search-container {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
@@ -67,6 +69,8 @@ html, body {
     border-radius: 1em !important;
 }
 
+
+/* Notifications, Tasks, Notes, Analytics Styles */
 .task-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
