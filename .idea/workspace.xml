@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="481e094d-f913-4566-b9d6-a800ec5215ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/string.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/img/wp-1.jpg" afterPath="$PROJECT_DIR$/assets/img/wp.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/styles.css" afterPath="$PROJECT_DIR$/assets/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/location.js" afterPath="$PROJECT_DIR$/assets/js/location.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/script.js" afterPath="$PROJECT_DIR$/assets/js/script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/weather.js" afterPath="$PROJECT_DIR$/assets/js/weather.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +17,8 @@
       <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/css/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="124" column="18" lean-forward="false" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
+            <state relative-caret-position="244">
+              <caret line="127" column="26" lean-forward="false" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -335,12 +327,12 @@
       <workItem from="1493165175446" duration="30000" />
       <workItem from="1493165224756" duration="149000" />
       <workItem from="1493168660577" duration="20834000" />
-      <workItem from="1494281159962" duration="8606000" />
+      <workItem from="1494281159962" duration="9181000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29619000" />
+    <option name="totallyTimeSpent" value="30194000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="722" extended-state="6" />
@@ -492,8 +484,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="124" column="18" lean-forward="false" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="18" />
+        <state relative-caret-position="244">
+          <caret line="127" column="26" lean-forward="false" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
           <folding />
         </state>
       </provider>

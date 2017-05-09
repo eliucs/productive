@@ -120,10 +120,17 @@ html, body {
     background-color: #fff;
     opacity: 0.75;
     border-radius: 1em;
+    cursor: pointer;
+
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
 }
 
 .access-item:hover {
-
+    box-shadow: 0px 0px 0px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .access-item-title {
