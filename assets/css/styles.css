@@ -9,6 +9,36 @@ html, body {
     height: 100%;
 }
 
+@media all and (max-width: 1060px) {
+    .access-container {
+        display: none;
+    }
+
+    .option-bar-container {
+        display: none;
+    }
+
+    .access-add-button {
+        display: none;
+    }
+
+    .weather-location-container {
+        display: none;
+    }
+}
+
+@media all and (max-width: 1040px) {
+    .task-title {
+        font-size: 1.4em !important;
+    }
+}
+
+@media all and (max-width: 435px) {
+    .task-title {
+        font-size: 1.25em !important;
+    }
+}
+
 .main-container {
     position: fixed;
     margin: 0;
@@ -64,6 +94,7 @@ html, body {
 }
 
 
+
 #notifications-container {
     height: 22.5em;
     background-color: white;
@@ -91,12 +122,6 @@ html, body {
     display: none;
 }
 
-
-@media all and (max-width: 1060px) {
-    .access-container {
-        display: none;
-    }
-}
 
 /* Quick Access Styles */
 .access-container {
@@ -136,8 +161,6 @@ html, body {
     background-color: #fff;
     opacity: 0.75;
     border-radius: 1em;
-    box-shadow: 0px 0px 0px rgba(81, 203, 238, 1);
-    border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .access-item {
@@ -178,7 +201,7 @@ html, body {
 }
 
 
-/* Secondary Section Styles */
+/* Option Bar, Date, Time, Weather, Location Styles */
 .secondary-section {
     margin-top: 2em;
 }
