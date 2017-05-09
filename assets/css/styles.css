@@ -103,12 +103,41 @@ html, body {
     margin-top: 1.9em;
 }
 
+.access-link, .access-link:hover, .access-link:visited {
+    text-decoration: none !important;
+}
+
 .access-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
     color: #fff;
+}
+
+.access-add-button {
+    margin-top: 1em;
+    padding: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+}
+
+.access-add-button:hover {
+    color: #222;
+    background-color: #fff;
+    opacity: 0.75;
+    border-radius: 1em;
+    box-shadow: 0px 0px 0px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .access-item {
@@ -121,7 +150,6 @@ html, body {
     opacity: 0.75;
     border-radius: 1em;
     cursor: pointer;
-
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -150,207 +178,59 @@ html, body {
 }
 
 
-
-/*
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.main-container {
-    position: fixed;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../img/wp.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.datetime-container {
-    position: fixed;
-    left: 7em;
-    bottom: 3em;
-}
-
-.time {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-size: 15vh;
-    font-weight: 500;
-    color: #fff;
-}
-
-.date {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif ;
-    font-size: 4vh;
-    font-weight: 500;
-    color: #fff;
-}
-
-.add-container {
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    bottom: 4.5em;
-}
-
-.add-container a {
-    font-size: 4em;
-    color: #fff;
-    text-decoration: none;
-}
-
-.add-container a:hover {
-    color: #ffbe2b;
+/* Secondary Section Styles */
+.secondary-section {
+    margin-top: 2em;
 }
 
 .option-container {
-    position: fixed;
-    bottom: 9.5em;
-    left: 1em;
-    z-index: 99;
+    padding-top: 0.25em;
+    font-size: 2em;
 }
 
 .option-container a {
-    font-size: 2.5em;
     color: #fff;
-    text-decoration: none;
+    cursor: pointer;
+    -webkit-transition: all 0.20s ease-in-out;
+    -moz-transition: all 0.20s ease-in-out;
+    -ms-transition: all 0.20s ease-in-out;
+    -o-transition: all 0.20s ease-in-out;
 }
 
 .option-container a:hover {
-    color: #ffbe2b;
+    color: rgba(81, 203, 238, 1);
 }
 
-.star-container {
-    position: fixed;
-    bottom: 6em;
-    left: 1em;
-    z-index: 99;
-}
-
-.star-container a {
-    font-size: 2.5em;
+.time-container {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5em;
     color: #fff;
-    text-decoration: none;
 }
 
-.star-container a:hover {
-    color: #ffbe2b;
-}
-
-.info-container {
-    position: fixed;
-    bottom: 2.5em;
-    left: 1em;
-    z-index: 99;
-}
-
-.info-container a {
-    font-size: 2.5em;
+.date-container {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2em;
     color: #fff;
-    text-decoration: none;
-}
-
-.info-container a:hover {
-    color: #ffbe2b;
 }
 
 .weather-container {
-    position: fixed;
-    right: 7em;
-    bottom: 3em;
-}
-
-.weather {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif ;
-    font-size: 15vh;
-    font-weight: 500;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 5em;
     color: #fff;
+    text-align: right;
 }
 
-.location {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif ;
-    font-size: 4vh;
-    font-weight: 500;
-    color: #fff;
-}
-
-@media all and (max-height: 610px) {
-    .datetime-container {
-        display: none;
-    }
-
-    .add-container {
-        display: none;
-    }
-
-    .weather-container {
-        display: none;
-    }
-}
-
-@media all and (max-width: 920px) {
-    .weather-container {
-        display: none;
-    }
-
-    .add-container {
-        display: none;
-    }
-}
-
-
-
-
-
-
-
-
-.tabs-container {
-    position: fixed;
-    left: 7.5em;
-    top: 2em;
-}
-
-.tabs-container h1 {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif ;
+.location-container {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
     font-size: 2em;
-    font-weight: 500;
     color: #fff;
+    text-align: right;
 }
-
-.quick-access-container {
-    position: absolute;
-    left: 40em;
-    top: 2em;
-    width: 99em;
-    overflow-x: hidden;
-}
-
-.quick-access-container h1 {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif ;
-    font-size: 2em;
-    font-weight: 500;
-    color: #fff;
-}
-
-
-.tasks-container {
-    position: fixed;
-    left: 7.5em;
-    top: 5em;
-    z-index: 99;
-    background-color: #000000;
-    opacity: 0.75;
-    border-radius: 10px;
-    width: 400px;
-    height: 350px;
-}
-*/
