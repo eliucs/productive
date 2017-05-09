@@ -2,30 +2,185 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Chrome extension for task management.">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:site_name" content="Chrome extension for task management.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Chrome extension for task management.">
+    <meta property="og:description" content="Chrome extension for task management.">
+
     <title>Productive</title>
 
+    <!-- Weather Icons -->
     <link rel="stylesheet" href="assets/img/weather-icons/pe-icon-7-weather/css/pe-icon-7-weather.css">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <!-- Bootstrap Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="assets/js/datetime.js"></script>
-    <script src="assets/js/location.js"></script>
-    <script src="assets/js/weather.js"></script>
-    <!--<script src="assets/js/weather-local.js"></script>-->
-    <!--<script src="assets/js/script.js"></script>-->
-
-
-
-
-
-
+    <!-- jQuery 3.2.1 -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Custom Script -->
+    <script type="text/javascript" src="assets/js/string.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 </head>
+
 <body>
+
+    <!-- Main Section -->
+    <section class="main-container">
+        <div class="container-fluid">
+
+            <!-- Search Bar -->
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="form-group search-container">
+                        <input id="search-bar" type="text" class="form-control search-bar" placeholder="Search here..." autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <!-- Tasks and Access Sections -->
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+
+                    <!-- Tasks Container -->
+                    <div class="nav-section">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a id="notifications-tab" class="nav-link task-title active" href="#">Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="task-tab" class="nav-link task-title" href="#">Tasks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="notes-tab" class="nav-link task-title" href="#">Notes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="analytics-tab" class="nav-link task-title" href="#">Analytics</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div id="notifications-container" class="notifications-container">
+
+                    </div>
+
+                    <!--
+                    <div id="tasks-container" class="tasks-container">
+
+                    </div>
+
+                    <div id="notes-container" class="notes-container">
+
+                    </div>
+
+                    <div id="analytics-container" class="analytics-container">
+
+                    </div>-->
+                </div>
+                <div class="col-md-5">
+
+                    <!-- Access Container -->
+                    <div class="access-container">
+                        <div class="access-title">Quick Access</div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Outlook</div>
+                                    <div class="access-item-desc">Primary Email</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Gmail</div>
+                                    <div class="access-item-desc">Secondary Email</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">YouTube</div>
+                                    <div class="access-item-desc">Videos</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="access-item">
+                                    <div class="access-item-title">Title</div>
+                                    <div class="access-item-desc">Description</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </section>
+
+    <!--
     <div class="main-container">
 
-        <!-- Bottom Section -->
         <div class="datetime-container">
             <div id="time" class="time"></div>
             <div id="date" class="date"></div>
@@ -41,10 +196,9 @@
 
         <div class="weather-container">
             <div id="weather" class="weather"></div>
-            <div id="location" class="location">City, Region</div>
+            <div id="location" class="location"></div>
         </div>
 
-        <!-- Top Section -->
         <div class="tabs-container">
             <h1>NOTIFICATIONS</h1>
         </div>
@@ -57,7 +211,7 @@
             <h1>QUICK ACCESS</h1>
         </div>
 
-
+        -->
 
 
     </div>
