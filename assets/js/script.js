@@ -1,5 +1,42 @@
 $(document).ready(function() {
 
+    var ProductiveData = {};
+
+    function initializeCacheData() {
+        if (Modernizr.localstorage) {
+            console.log(SUCCESS_LOCAL_STORAGE);
+            if (localStorage['ProductiveData']) {
+                ProductiveData = JSON.parse(localStorage['ProductiveData']);
+                console.log(SUCCESS_DATA_LOADED);
+            } else {
+                var cache =
+                    {
+                        'numTasks': 0,
+                        'taskData': [],
+                        'noteText': '',
+                        'totalTasksCreated': 0,
+                        'totalTasksCompleted': 0,
+                        'totalTasksDeleted': 0,
+                        'numLinks': 0,
+                        'linkData': []
+                    }
+
+                ProductiveData = cache;
+                localStorage['ProductiveData'] = JSON.stringify(cache);
+                console.log(SUCCESS_NEW_DATA_LOADED);
+            }
+        } else {
+            // TO-DO: Handle case where user's browser
+            // does not have LocalStorage compatibility
+            console.log(ERROR_LOCAL_STORAGE);
+        }
+    }
+    initializeCacheData();
+
+
+
+
+
 
     function timeAppendZero(i) {
         if (i < 10) { i = "0" + i }
