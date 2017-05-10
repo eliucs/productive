@@ -16,9 +16,10 @@ $(document).ready(function() {
                         'totalTasksCreated': 0,
                         'totalTasksCompleted': 0,
                         'totalTasksDeleted': 0,
+                        'buttonLinkID': 0,
                         'numLinks': 0,
                         'linkData': []
-                    }
+                    };
 
                 ProductiveData = cache;
                 localStorage['ProductiveData'] = JSON.stringify(cache);
@@ -43,7 +44,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < numLinks; i++) {
                 html += '<div class="col-md-3">';
-                html += '<a class="access-link" href="' + ProductiveData['linkData'][i]['url'] + '">';
+                html += '<a class="access-link" value="' + ProductiveData['linkData'][i]['id'] + '" href="' + ProductiveData['linkData'][i]['url'] + '">';
                 html += '<div class="access-item">';
                 html += '<div class="access-item-title">' + ProductiveData['linkData'][i]['title'] + '</div>';
                 html += '<div class="access-item-desc">' + ProductiveData['linkData'][i]['desc'] + '</div>';
@@ -54,6 +55,27 @@ $(document).ready(function() {
         }
     }
     displayLinks();
+
+
+    function displayCurrentLinks() {
+        var numLinks = ProductiveData['numLinks'];
+
+        if (!numLinks) {
+            $('#empty-current-links').css('display', 'block');
+        } else {
+            $('#empty-current-links').css('display', 'none');
+            var html = '';
+
+            for (var i = 0; i < numLinks; i++) {
+                html += '<li class="list-group-item">';
+                html += '<button class="btn btn-default current-links-close" value="' + ProductiveData['linkData'][i]['id'] + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
+                html += '<div class="current-links-item">' + ProductiveData['linkData'][i]['title'] + '</div></li>';
+            }
+
+            $('#current-links').html(html);
+        }
+    }
+    displayCurrentLinks();
 
 
     function timeAppendZero(i) {
@@ -84,9 +106,9 @@ $(document).ready(function() {
         var month = date.getMonth();
         var day = date.getDate();
         var year = date.getFullYear();
-        return monthNames[month] + ' ' + day + ', ' + year;
+        $('#date').html(monthNames[month] + ' ' + day + ', ' + year);
     }
-    $("#date").html(updateDate());
+    updateDate();
 
 
     // Triggers Google Search on 'Enter' key pressed
@@ -114,13 +136,13 @@ $(document).ready(function() {
 
     $('#manage-open').click(function() {
         $('.manage-close').css('display', 'block');
-        $('.manage-container').css('display', 'block');
+        $('.manage-container').fadeIn();
     });
 
 
     $('#manage-close').click(function() {
         $('.manage-close').css('display', 'none');
-        $('.manage-container').css('display', 'none');
+        $('.manage-container').fadeOut();
     });
 
 
@@ -130,6 +152,7 @@ $(document).ready(function() {
         var newLinkURL = $('#link-url').val();
         var newLinkTitle = $('#link-title').val();
         var newLinkDesc = $('#link-desc').val();
+        var newID = ProductiveData['buttonLinkID'];
 
         if (newLinkURL && newLinkTitle && newLinkDesc) {
             if (numLinks == MAX_NUM_LINKS) {
@@ -142,16 +165,42 @@ $(document).ready(function() {
                 // to HTML safe strings
 
                 ProductiveData['linkData'].push({
+                    'id': newID,
                     'url': newLinkURL,
                     'title': newLinkTitle,
                     'desc': newLinkDesc
                 });
 
+                ProductiveData['buttonLinkID']++;
                 ProductiveData['numLinks']++;
 
                 localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
                 displayLinks(); // Update links
+                displayCurrentLinks(); // Update current links
 
+                $('.current-links-close').click(function() {
+                    $(this).closest('.list-group-item').fadeOut(250);
+
+                    var id = $(this).val();
+
+                    ProductiveData['linkData'] = $.grep(ProductiveData['linkData'], function(e) {
+                        return e['id'] != id;
+                    });
+
+                    ProductiveData['numLinks']--;
+
+                    if (ProductiveData['numLinks'] == 0) {
+                        $('#empty-current-links').css('display', 'block');
+                    } else {
+                        $('#empty-current-links').css('display', 'none');
+                    }
+
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                    console.log(SUCCESS_DELETE_LINK + id);
+                });
+
+                console.log(SUCCESS_NEW_LINK_ID + newID);
                 console.log(SUCCESS_NEW_LINK_URL + newLinkURL);
                 console.log(SUCCESS_NEW_LINK_TITLE + newLinkTitle);
                 console.log(SUCCESS_NEW_LINK_DESC + newLinkDesc);
