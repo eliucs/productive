@@ -177,6 +177,7 @@ html, body {
     opacity: 0.75;
     border-radius: 1em;
     cursor: pointer;
+    overflow: scroll;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -270,17 +271,17 @@ html, body {
     height: 100%;
     overflow: hidden;
     z-index: 99;
-    display: none;
+    display: block;
 }
 
 .manage-area-container {
     height: 9999em;
     background-color: #fff;
-    opacity: 0.9;
+    opacity: 0.95;
     overflow-y: hidden;
 }
 
-@media all and (max-width: 425px) {
+@media all and (max-width: 547px) {
     .manage-title {
         font-size: 3.5em !important;
     }
@@ -288,13 +289,28 @@ html, body {
 
 .manage-title {
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.1em;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 5em;
     color: #222;
     text-align: center;
+}
+
+.manage-error {
+    margin-bottom: 1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #8b0000;
+    text-align: center;
+    display: none;
+}
+
+.new-link-area {
+    margin-top: 2em;
 }
 
 @media all and (max-width: 992px) {
@@ -330,6 +346,36 @@ html, body {
     color: #222;
 }
 
+.current-links-title {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #222;
+    text-align: center;
+}
+
+.current-links-container {
+    margin-top: 1em;
+    height: 10em;
+}
+
+.current-links-close {
+    margin-left: -0.5em;
+    margin-right: 0.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    border: none;
+    background-color: transparent;
+}
+
+.current-links-item {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
+    color: #222;
+    display: inline;
+}
 
 
 
@@ -341,4 +387,21 @@ html, body {
     font-style: normal;
     font-size: 3em;
     color: #fff;
+}
+
+.manage-close-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    z-index: 999;
+}
+
+.manage-close {
+    font-size: 2em;
+    color: #222 !important;
+    cursor: pointer;
+}
+
+.manage-close:hover {
+    color: rgba(81, 203, 238, 1) !important;
 }

@@ -152,7 +152,7 @@
 
             <!-- Manage Links -->
             <div class="col-md-2">
-                <div id="manage" class="access-add-button">Manage Links</div>
+                <div id="manage-open" class="access-add-button">Manage Links</div>
             </div>
 
             <!-- Weather and Location -->
@@ -176,6 +176,12 @@
 
     <!-- Manage Section -->
     <section class="manage-container">
+        <div class="manage-close-container">
+            <div id="manage-close" class="manage-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+        </div>
+
         <div class="container-fluid">
             <div class="row">
 
@@ -183,54 +189,106 @@
                 <div class="col-md-12 manage-area-container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="manage-title">Manage Links</div>
+                            <div class="manage-title">Manage Shortcuts</div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5">
                             <!-- Input New Link Details -->
                             <div class="row">
-                                <div class="col-md-3"><div class="new-link-title">Link URL</div></div>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input id="link-url" type="text" class="form-control new-link-bar" autocomplete="off">
+                                <div class="col-md-12">
+                                    <div class="manage-error">You can only have a maximum of 12 shortcuts.</div>
+                                </div>
+                            </div>
+
+                            <div class="new-link-area">
+                                <div class="row">
+                                    <div class="col-md-3"><div class="new-link-title">Link URL</div></div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input id="link-url" type="text" class="form-control new-link-bar" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3"><div class="new-link-title">Link Title</div></div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input id="link-title" type="text" class="form-control new-link-bar" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3"><div class="new-link-title">Link Description</div></div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input id="link-desc" type="text" class="form-control new-link-bar" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-9">
+                                        <button id="link-button" class="btn btn-default new-link-button">Add</button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-3"><div class="new-link-title">Link Title</div></div>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input id="link-title" type="text" class="form-control new-link-bar" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3"><div class="new-link-title">Link Description</div></div>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input id="link-desc" type="text" class="form-control new-link-bar" autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-9">
-                                    <button id="link-button" class="btn btn-default new-link-button">Add</button>
-                                </div>
-                            </div>
-
-
-
-
-
                         </div>
-                        <div class="col-md-3"></div>
+
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="current-links-title">Current Shortcuts</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="list-group current-links-container">
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <button class="btn btn-default current-links-close"><i class="fa fa-close" aria-hidden="true"></i></button>
+                                            <div class="current-links-item">Google</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
