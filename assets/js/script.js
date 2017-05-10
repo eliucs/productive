@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var ProductiveData = {};
 
-    function initializeCacheData() {
+    (function () {
         if (Modernizr.localstorage) {
             console.log(SUCCESS_LOCAL_STORAGE);
             if (localStorage['ProductiveData']) {
@@ -30,12 +30,31 @@ $(document).ready(function() {
             // does not have LocalStorage compatibility
             console.log(ERROR_LOCAL_STORAGE);
         }
+    })();
+
+
+    function displayLinks() {
+        var numLinks = ProductiveData['numLinks'];
+
+        if (!numLinks) {
+            $('#empty-links').css('display', 'block');
+        } else {
+            $('#empty-links').css('display', 'none');
+            var html = '';
+
+            for (var i = 0; i < numLinks; i++) {
+                html += '<div class="col-md-3">';
+                html += '<a class="access-link" href="' + ProductiveData['linkData'][i]['url'] + '">';
+                html += '<div class="access-item">';
+                html += '<div class="access-item-title">' + ProductiveData['linkData'][i]['title'] + '</div>';
+                html += '<div class="access-item-desc">' + ProductiveData['linkData'][i]['desc'] + '</div>';
+                html += '</div></a></div>';
+            }
+
+            $('#quick-access').html(html);
+        }
     }
-    initializeCacheData();
-
-
-
-
+    displayLinks();
 
 
     function timeAppendZero(i) {

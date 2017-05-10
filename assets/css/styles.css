@@ -270,7 +270,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     z-index: 99;
-    display: block;
+    display: none;
 }
 
 .manage-area-container {
@@ -328,4 +328,17 @@ html, body {
     font-style: normal;
     font-size: 1.25em;
     color: #222;
+}
+
+
+
+
+
+.empty-links {
+    padding-top: 1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 3em;
+    color: #fff;
 }
