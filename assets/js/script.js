@@ -88,7 +88,8 @@ $(document).ready(function() {
         var time = new Date();
         var hour = time.getHours();
         var ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour >= 12 ? hour - 12 : hour;
+        hour = hour > 12 ? hour - 12 : hour;
+        hour = hour === 0 ? 12 : hour;
         var min = time.getMinutes();
         min = timeAppendZero(min);
         $("#time").html(hour + ':' + min + ' ' + ampm);
@@ -124,6 +125,61 @@ $(document).ready(function() {
                 console.log(ERROR_SEARCH);
             }
         }
+    });
+
+
+    $('#notifications-tab').click(function() {
+        $('#notifications-tab').addClass('active');
+        $('#task-tab').removeClass('active');
+        $('#notes-tab').removeClass('active');
+        $('#analytics-tab').removeClass('active');
+        $('#notifications-container').show();
+        $('#tasks-container').hide();
+        $('#notes-container').hide();
+        $('#analytics-container').hide();
+    });
+
+    $('#task-tab').click(function() {
+        $('#notifications-tab').removeClass('active');
+        $('#task-tab').addClass('active');
+        $('#notes-tab').removeClass('active');
+        $('#analytics-tab').removeClass('active');
+
+        $('#notifications-container').hide();
+        $('#tasks-container').show();
+        $('#notes-container').hide();
+        $('#analytics-container').hide();
+
+    });
+
+    $('#notes-tab').click(function() {
+        $('#notifications-tab').removeClass('active');
+        $('#task-tab').removeClass('active');
+        $('#notes-tab').addClass('active');
+        $('#analytics-tab').removeClass('active');
+
+        $('#notifications-container').hide();
+        $('#tasks-container').hide();
+        $('#notes-container').show();
+        $('#analytics-container').hide();
+    });
+
+
+    // Analytics Tab
+    $('#analytics-tab').click(function() {
+        $('#notifications-tab').removeClass('active');
+        $('#task-tab').removeClass('active');
+        $('#notes-tab').removeClass('active');
+        $('#analytics-tab').addClass('active');
+
+        $('#notifications-container').hide();
+        $('#tasks-container').hide();
+        $('#notes-container').hide();
+        $('#analytics-container').show();
+
+        $('#total-tasks-created').html(ProductiveData['totalTasksCreated']);
+        $('#total-tasks-completed').html(ProductiveData['totalTasksCompleted']);
+        $('#total-tasks-deleted').html(ProductiveData['totalTasksDeleted']);
     });
 
 
@@ -201,10 +257,8 @@ $(document).ready(function() {
 
                     if (ProductiveData['numLinks'] == 0) {
                         $('#empty-current-links').css('display', 'block');
-                        $('#empty-links').css('display', 'block');
                     } else {
                         $('#empty-current-links').css('display', 'none');
-                        $('#empty-links').css('display', 'none');
                     }
 
                     displayLinks();

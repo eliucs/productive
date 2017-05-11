@@ -29,7 +29,7 @@ html, body {
 
 @media all and (max-width: 1040px) {
     .task-title {
-        font-size: 1.4em !important;
+        font-size: 1.35em !important;
     }
 }
 
@@ -92,16 +92,21 @@ html, body {
 }
 
 .active {
-    color: #000;
-    background-color: #fff;
-    opacity: 0.75;
+    color: #000 !important;
+    background-color: #fff !important;
+    opacity: 0.75 !important;
 }
 
+.active:visited {
+    color: #000 !important;
+    background-color: #fff !important;
+    opacity: 0.75 !important;
+}
 
 
 #notifications-container {
     height: 22.5em;
-    background-color: white;
+    background-color: #fff;
     opacity: 0.75;
     display: block;
     border-radius: 1em;
@@ -109,23 +114,68 @@ html, body {
 }
 
 #tasks-container {
-    height: 300px;
-    background-color: white;
+    height: 22.5em;
+    background-color: #fff;
+    opacity: 0.75;
+    display: block;
+    border-radius: 1em;
+    border-top-left-radius: 0;
     display: none;
 }
 
 #notes-container {
-    height: 300px;
-    background-color: white;
+    height: 22.5em;
+    background-color: #fff;
+    opacity: 0.75;
+    display: block;
+    border-radius: 1em;
+    border-top-left-radius: 0;
     display: none;
+}
+
+.notes-area {
+    margin: 0.5em;
+    width: 97%;
+    height: 21em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1em;
+    color: #222;
+    resize: none;
+    border: none;
 }
 
 #analytics-container {
-    height: 300px;
-    background-color: white;
+    height: 22.5em;
+    background-color: #fff;
+    opacity: 0.75;
+    display: block;
+    border-radius: 1em;
+    border-top-left-radius: 0;
     display: none;
 }
 
+.analytics-item-title {
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2em;
+    color: #222;
+}
+
+.analytics-item {
+    padding-left: 1em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2em;
+    color: #222;
+}
 
 /* Quick Access Styles */
 .access-container {
@@ -216,8 +266,18 @@ html, body {
 
 
 /* Option Bar, Date, Time, Weather, Location Styles */
+
+/*
+@media all and (max-height: 450px) {
+    .secondary-section {
+        display: none;
+    }
+}*/
+
 .secondary-section {
-    margin-top: 1em;
+    position: fixed;
+    width: 100%;
+    bottom: 1.5em;
 }
 
 .option-container {
@@ -279,7 +339,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     z-index: 99;
-    display: block;
+    display: none;
 }
 
 .manage-area-container {
