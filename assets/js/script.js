@@ -184,7 +184,6 @@ $(document).ready(function() {
 
                     var numLinks = ProductiveData['numLinks'];
                     var id = $(this).attr('value');
-                    console.log(id);
 
                     // Remove from Current Links
                     $(this).closest('.list-group-item').fadeOut(250);
@@ -195,11 +194,20 @@ $(document).ready(function() {
 
                     ProductiveData['numLinks']--;
 
+                    // Refresh Quick Access
+                    $('.quick-access-link').each(function() {
+                        $(this).hide();
+                    });
+
                     if (ProductiveData['numLinks'] == 0) {
                         $('#empty-current-links').css('display', 'block');
+                        $('#empty-links').css('display', 'block');
                     } else {
                         $('#empty-current-links').css('display', 'none');
+                        $('#empty-links').css('display', 'none');
                     }
+
+                    displayLinks();
 
                     localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
