@@ -43,8 +43,8 @@ $(document).ready(function() {
             var html = '';
 
             for (var i = 0; i < numLinks; i++) {
-                html += '<div class="col-md-3">';
-                html += '<a class="access-link" value="' + ProductiveData['linkData'][i]['id'] + '" href="' + ProductiveData['linkData'][i]['url'] + '">';
+                html += '<div class="col-md-3 quick-access-link" id="' + ProductiveData['linkData'][i]['id'] + '">';
+                html += '<a class="access-link" href="' + ProductiveData['linkData'][i]['url'] + '">';
                 html += '<div class="access-item">';
                 html += '<div class="access-item-title">' + ProductiveData['linkData'][i]['title'] + '</div>';
                 html += '<div class="access-item-desc">' + ProductiveData['linkData'][i]['desc'] + '</div>';
@@ -179,9 +179,15 @@ $(document).ready(function() {
                 displayCurrentLinks(); // Update current links
 
                 $('.current-links-close').click(function() {
-                    $(this).closest('.list-group-item').fadeOut(250);
+                    $(this).prop('disabled', true);
+                    $(this).css('cursor', 'default');
 
-                    var id = $(this).val();
+                    var numLinks = ProductiveData['numLinks'];
+                    var id = $(this).attr('value');
+                    console.log(id);
+
+                    // Remove from Current Links
+                    $(this).closest('.list-group-item').fadeOut(250);
 
                     ProductiveData['linkData'] = $.grep(ProductiveData['linkData'], function(e) {
                         return e['id'] != id;
@@ -200,10 +206,7 @@ $(document).ready(function() {
                     console.log(SUCCESS_DELETE_LINK + id);
                 });
 
-                console.log(SUCCESS_NEW_LINK_ID + newID);
-                console.log(SUCCESS_NEW_LINK_URL + newLinkURL);
-                console.log(SUCCESS_NEW_LINK_TITLE + newLinkTitle);
-                console.log(SUCCESS_NEW_LINK_DESC + newLinkDesc);
+                console.log(SUCCESS_NEW_LINK + newID + ', ' + newLinkURL + ', ' + newLinkTitle + ', ' + newLinkDesc);
             }
         } else {
             console.log(ERROR_NEW_LINK);
