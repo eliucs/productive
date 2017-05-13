@@ -108,10 +108,23 @@ html, body {
     height: 22.5em;
     background-color: #fff;
     opacity: 0.75;
-    display: block;
+    display: none;
     border-radius: 1em;
     border-top-left-radius: 0;
 }
+
+.empty-notifications-title {
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2em;
+    color: #222;
+    text-align: left;
+}
+
+
 
 #tasks-container {
     height: 22.5em;
@@ -120,14 +133,45 @@ html, body {
     display: block;
     border-radius: 1em;
     border-top-left-radius: 0;
-    display: none;
+    overflow: scroll;
 }
+
+.empty-tasks-title {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2em;
+    color: #222;
+    text-align: center;
+}
+
+.tasks-area {
+    margin: 0.5em;
+}
+
+.tasks-items-area {
+    margin-top: 1em;
+}
+
+.add-task-bar {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1em;
+    color: #222;
+}
+
+.tasks-item:disabled {
+    background-color: #fff;
+    cursor: default;
+}
+
+
 
 #notes-container {
     height: 22.5em;
     background-color: #fff;
     opacity: 0.75;
-    display: block;
     border-radius: 1em;
     border-top-left-radius: 0;
     display: none;
@@ -150,7 +194,6 @@ html, body {
     height: 22.5em;
     background-color: #fff;
     opacity: 0.75;
-    display: block;
     border-radius: 1em;
     border-top-left-radius: 0;
     display: none;
@@ -162,7 +205,7 @@ html, body {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
     font-style: normal;
-    font-size: 2em;
+    font-size: 1.75em;
     color: #222;
 }
 

@@ -56,6 +56,29 @@ $(document).ready(function() {
     }
     displayLinks();
 
+    function displayTasks() {
+        var numTasks = ProductiveData['numTasks'];
+
+        if (!numTasks) {
+            $('#empty-links').css('display', 'block');
+        } else {
+            $('#empty-links').css('display', 'none');
+            var html = '';
+
+            for (var i = 0; i < numTasks; i++) {
+                html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+                html += '<input type="text" class="form-control tasks-item" value="' + ProductiveData['taskData'][i] + '" disabled>';
+                html += '<span class="input-group-btn">';
+                html += '<button class="btn btn-default task-complete-button" type="button"><i class="fa fa-check" aria-hidden="true"></i></button>';
+                html += '<button class="btn btn-default task-delete-button" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                html += '</span></div></div></div>';
+            }
+
+            $('#tasks-items-area').html(html);
+        }
+    }
+    displayTasks();
+
 
     function displayCurrentLinks() {
         var numLinks = ProductiveData['numLinks'];
@@ -126,6 +149,57 @@ $(document).ready(function() {
             }
         }
     });
+
+    /* Tasks Handling */
+    function initializeDeleteButtons() {
+        $('.task-delete-button').click(function() {
+
+            $(this).parent().parent().fadeOut();
+            
+        });
+    }
+    initializeDeleteButtons();
+
+
+    $('#add-task-button').click(function() {
+        var taskText = $('#add-task-bar').val();
+
+        if (!taskText) {
+            // TO-DO: Handle case where text is null string
+        } else {
+            var html = '';
+
+            html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+            html += '<input type="text" class="form-control tasks-item" value="' + taskText + '" disabled>';
+            html += '<span class="input-group-btn">';
+            html += '<button class="btn btn-default task-complete-button" type="button"><i class="fa fa-check" aria-hidden="true"></i></button>';
+            html += '<button class="btn btn-default task-delete-button" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>';
+            html += '</span></div></div></div>';
+
+            $('#tasks-items-area').append(html);
+            $('#add-task-bar').html('');
+
+            ProductiveData['taskData'].push(taskText);
+            ProductiveData['numTasks']++;
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+            if (!ProductiveData['numTasks']) {
+                $('#empty-tasks').css('display', 'block');
+            } else {
+                $('#empty-tasks').css('display', 'none');
+            }
+
+            $('.task-delete-button').click(function() {
+                $(this).parent().parent().fadeOut();
+            });
+
+
+
+
+        }
+    });
+
+
 
 
     $('#notifications-tab').click(function() {

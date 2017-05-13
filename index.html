@@ -62,10 +62,10 @@
                     <div class="nav-section">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a id="notifications-tab" class="nav-link task-title active" href="#">Notifications</a>
+                                <a id="notifications-tab" class="nav-link task-title" href="#">Notifications</a>
                             </li>
                             <li class="nav-item">
-                                <a id="task-tab" class="nav-link task-title" href="#">Tasks</a>
+                                <a id="task-tab" class="nav-link task-title active" href="#">Tasks</a>
                             </li>
                             <li class="nav-item">
                                 <a id="notes-tab" class="nav-link task-title" href="#">Notes</a>
@@ -78,12 +78,42 @@
 
 
                     <div id="notifications-container" class="notifications-container">
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="empty-notifications-title">You have no notifications.</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="tasks-container" class="tasks-container">
-                        
+                        <!-- Add a Task -->
+                        <div class="tasks-area">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input id="add-task-bar" type="text" class="form-control add-task-bar" placeholder="Add a task here...">
+                                        <span class="input-group-btn">
+                                        <button id="add-task-button" class="btn btn-default" type="button">Add</button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div id="tasks-items-area" class="tasks-items-area">
+                                <div id="empty-tasks" class="row">
+                                    <div class="col-md-12">
+                                        <div class="empty-tasks-title">You have no tasks.</div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+                        </div>
                     </div>
 
                     <div id="notes-container" class="notes-container">
@@ -299,5 +329,7 @@
     </section>
 
     </div>
+
+    <script src="assets/js/task.js" type="text/javascript"></script>
 </body>
 </html>
