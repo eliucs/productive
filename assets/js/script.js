@@ -8,7 +8,7 @@ $(document).ready(function() {
     // Initialize localStorage data
     var ProductiveData = {};
 
-    (function () {
+    (function initializeDataStorage () {
         if (Modernizr.localstorage) {
             console.log(SUCCESS_LOCAL_STORAGE);
             if (localStorage['ProductiveData']) {
@@ -24,7 +24,8 @@ $(document).ready(function() {
                         'totalTasksCompleted': 0,
                         'totalTasksDeleted': 0,
                         'numLinks': 0,
-                        'linkData': []
+                        'linkData': [],
+                        'initLinksTimestamp': []
                     };
 
                 ProductiveData = cache;
@@ -56,6 +57,19 @@ $(document).ready(function() {
 
 
     // Tasks Tab and Section
+    $('#task-tab').click(function() {
+        $('#notifications-tab').removeClass('active');
+        $('#task-tab').addClass('active');
+        $('#notes-tab').removeClass('active');
+        $('#analytics-tab').removeClass('active');
+
+        $('#notifications-container').hide();
+        $('#tasks-container').show();
+        $('#notes-container').hide();
+        $('#analytics-container').hide();
+    });
+
+
     (function displayTasks() {
         var numTasks = ProductiveData['numTasks'];
 
@@ -210,6 +224,32 @@ $(document).ready(function() {
     });
 
 
+    // Notes Tab and Section
+    $('#notes-tab').click(function() {
+        $('#notifications-tab').removeClass('active');
+        $('#task-tab').removeClass('active');
+        $('#notes-tab').addClass('active');
+        $('#analytics-tab').removeClass('active');
+
+        $('#notifications-container').hide();
+        $('#tasks-container').hide();
+        $('#notes-container').show();
+        $('#analytics-container').hide();
+    });
+
+    (function initializeNotes() {
+        var notes = ProductiveData['noteText'];
+
+        if (notes) {
+            $('.notes-area').html(notes);
+        }
+    })();
+
+    $('.notes-area').keydown(function(e) {
+        ProductiveData['noteText'] = $('.notes-area').val();
+        localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+    });
+
 
 
 
@@ -333,30 +373,9 @@ $(document).ready(function() {
         $('#analytics-container').hide();
     });
 
-    $('#task-tab').click(function() {
-        $('#notifications-tab').removeClass('active');
-        $('#task-tab').addClass('active');
-        $('#notes-tab').removeClass('active');
-        $('#analytics-tab').removeClass('active');
 
-        $('#notifications-container').hide();
-        $('#tasks-container').show();
-        $('#notes-container').hide();
-        $('#analytics-container').hide();
 
-    });
 
-    $('#notes-tab').click(function() {
-        $('#notifications-tab').removeClass('active');
-        $('#task-tab').removeClass('active');
-        $('#notes-tab').addClass('active');
-        $('#analytics-tab').removeClass('active');
-
-        $('#notifications-container').hide();
-        $('#tasks-container').hide();
-        $('#notes-container').show();
-        $('#analytics-container').hide();
-    });
 
 
     // Analytics Tab
