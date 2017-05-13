@@ -1,5 +1,11 @@
+// Productive Google Chrome Extension
+// Copyright (c) 2017 Eric Liu (ericliu.ca)
+// Website: startproductive.com
+// Twitter: @startproductive
+
 $(document).ready(function() {
 
+    // Initialize localStorage data
     var ProductiveData = {};
 
     (function () {
@@ -12,11 +18,11 @@ $(document).ready(function() {
                 var cache = {
                         'numTasks': 0,
                         'taskData': [],
+                        'initTasksTimestamp': [],
                         'noteText': '',
                         'totalTasksCreated': 0,
                         'totalTasksCompleted': 0,
                         'totalTasksDeleted': 0,
-                        'buttonLinkID': 0,
                         'numLinks': 0,
                         'linkData': []
                     };
@@ -26,11 +32,193 @@ $(document).ready(function() {
                 console.log(SUCCESS_NEW_DATA_LOADED);
             }
         } else {
-            // TO-DO: Handle case where user's browser
-            // does not have LocalStorage compatibility
             console.log(ERROR_LOCAL_STORAGE);
         }
     })();
+
+
+    // Search Bar
+    $('#search-bar').keypress(function(e){
+
+        // Triggers Google Search on 'Enter' key pressed
+        if (e.which == KEY_ENTER) {
+            var searchText = $('#search-bar').val();
+            searchText = encodeURIComponent(searchText.toLowerCase());
+
+            if (searchText) {
+                console.log(SUCCESS_SEARCH + searchText);
+                window.location.href = URL_GOOGLE + searchText;
+            } else {
+                console.log(ERROR_SEARCH);
+            }
+        }
+    });
+
+
+    // Tasks Tab and Section
+    (function displayTasks() {
+        var numTasks = ProductiveData['numTasks'];
+
+        if (!numTasks) {
+            $('#empty-tasks').css('display', 'block');
+        } else {
+            $('#empty-tasks').css('display', 'none');
+            var html = '';
+
+            for (var i = 0; i < numTasks; i++) {
+                html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+                html += '<input type="text" class="form-control tasks-item" value="' +
+                    ProductiveData['taskData'][i]['text'] + '" disabled>';
+                html += '<span class="input-group-btn">';
+                html += '<button class="btn btn-default task-complete-button" type="button" data-timestamp="' +
+                    ProductiveData['taskData'][i]['timestamp'] + '"><i class="fa fa-check" aria-hidden="true"></i></button>';
+                html += '<button class="btn btn-default task-delete-button" type="button" data-timestamp="' +
+                    ProductiveData['taskData'][i]['timestamp'] + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                html += '</span></div></div></div>';
+
+                ProductiveData['initTasksTimestamp'].push(ProductiveData['taskData'][i]['timestamp']);
+            }
+
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+            $('#tasks-items-area').append(html);
+        }
+    })();
+
+
+    (function initializeCompleteButtons() {
+        $('.task-complete-button').click(function() {
+            var timestamp = $(this).attr('data-timestamp');
+
+            $(this).prop('disabled', 'true');
+            $(this).css('cursor', 'default');
+            $(this).parent().parent().parent().parent().fadeOut();
+
+            ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
+               return e['timestamp'] !== timestamp;
+            });
+
+            ProductiveData['totalTasksCompleted']++;
+            ProductiveData['numTasks']--;
+
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+            if (ProductiveData['numTasks'] === 0) {
+                $('#empty-tasks').fadeIn();
+            } else {
+                $('#empty-tasks').fadeOut();
+            }
+        })
+    })();
+
+
+    (function initializeDeleteButtons() {
+        $('.task-delete-button').click(function () {
+            var timestamp = $(this).attr('data-timestamp');
+
+            $(this).prop('disabled', 'true');
+            $(this).css('cursor', 'default');
+            $(this).parent().parent().parent().parent().fadeOut();
+
+            ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
+                return e['timestamp'] !== timestamp;
+            });
+
+            ProductiveData['totalTasksDeleted']++;
+            ProductiveData['numTasks']--;
+
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+            if (ProductiveData['numTasks'] === 0) {
+                $('#empty-tasks').fadeIn();
+            } else {
+                $('#empty-tasks').fadeOut();
+            }
+        });
+    })();
+
+
+    $('#add-task-button').click(function() {
+        var timestamp = Date.now();
+        var taskText = $('#add-task-bar').val();
+
+        if (taskText) {
+            $('#empty-tasks').css('display', 'none');
+
+            var html = '';
+
+            html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+            html += '<input type="text" class="form-control tasks-item" value="' + taskText + '" disabled>';
+            html += '<span class="input-group-btn">';
+            html += '<button class="btn btn-default task-complete-button" type="button" data-timestamp="' + timestamp + '"><i class="fa fa-check" aria-hidden="true"></i></button>';
+            html += '<button class="btn btn-default task-delete-button" type="button" data-timestamp="' + timestamp + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
+            html += '</span></div></div></div>';
+
+            $('#tasks-items-area').append(html);
+            $('#add-task-bar').html('');
+
+            ProductiveData['taskData'].push({
+                'text': taskText,
+                'timestamp': timestamp
+            });
+            ProductiveData['totalTasksCreated']++;
+            ProductiveData['numTasks']++;
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+
+            $('.task-complete-button[data-timestamp="' + timestamp + '"]').click(function() {
+                $(this).prop('disabled', 'true');
+                $(this).css('cursor', 'default');
+                $(this).parent().parent().parent().parent().fadeOut();
+
+                ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
+                    return e['timestamp'] !== timestamp;
+                });
+
+                ProductiveData['totalTasksCompleted']++;
+                ProductiveData['numTasks']--;
+
+                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                if (ProductiveData['numTasks'] === 0) {
+                    $('#empty-tasks').fadeIn();
+                } else {
+                    $('#empty-tasks').fadeOut();
+                }
+            });
+
+            $('.task-delete-button[data-timestamp="' + timestamp + '"]').click(function() {
+                $(this).prop('disabled', 'true');
+                $(this).css('cursor', 'default');
+                $(this).parent().parent().parent().parent().fadeOut();
+
+                ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
+                    return e['timestamp'] !== timestamp;
+                });
+
+                ProductiveData['totalTasksDeleted']++;
+                ProductiveData['numTasks']--;
+
+                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                if (ProductiveData['numTasks'] === 0) {
+                    $('#empty-tasks').fadeIn();
+                } else {
+                    $('#empty-tasks').fadeOut();
+                }
+            });
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
 
 
     function displayLinks() {
@@ -56,28 +244,12 @@ $(document).ready(function() {
     }
     displayLinks();
 
-    function displayTasks() {
-        var numTasks = ProductiveData['numTasks'];
 
-        if (!numTasks) {
-            $('#empty-links').css('display', 'block');
-        } else {
-            $('#empty-links').css('display', 'none');
-            var html = '';
 
-            for (var i = 0; i < numTasks; i++) {
-                html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
-                html += '<input type="text" class="form-control tasks-item" value="' + ProductiveData['taskData'][i] + '" disabled>';
-                html += '<span class="input-group-btn">';
-                html += '<button class="btn btn-default task-complete-button" type="button"><i class="fa fa-check" aria-hidden="true"></i></button>';
-                html += '<button class="btn btn-default task-delete-button" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>';
-                html += '</span></div></div></div>';
-            }
 
-            $('#tasks-items-area').html(html);
-        }
-    }
-    displayTasks();
+
+
+
 
 
     function displayCurrentLinks() {
@@ -135,69 +307,17 @@ $(document).ready(function() {
     updateDate();
 
 
-    // Triggers Google Search on 'Enter' key pressed
-    $('#search-bar').keypress(function(e){
-        if (e.which == KEY_ENTER) {
-            var searchText = $('#search-bar').val();
-            searchText = encodeURIComponent(searchText.toLowerCase());
 
-            if (searchText) {
-                console.log(SUCCESS_SEARCH + searchText);
-                window.location.href = URL_GOOGLE + searchText;
-            } else {
-                console.log(ERROR_SEARCH);
-            }
-        }
-    });
 
     /* Tasks Handling */
-    function initializeDeleteButtons() {
-        $('.task-delete-button').click(function() {
-
-            $(this).parent().parent().fadeOut();
-            
-        });
-    }
-    initializeDeleteButtons();
-
-
-    $('#add-task-button').click(function() {
-        var taskText = $('#add-task-bar').val();
-
-        if (!taskText) {
-            // TO-DO: Handle case where text is null string
-        } else {
-            var html = '';
-
-            html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
-            html += '<input type="text" class="form-control tasks-item" value="' + taskText + '" disabled>';
-            html += '<span class="input-group-btn">';
-            html += '<button class="btn btn-default task-complete-button" type="button"><i class="fa fa-check" aria-hidden="true"></i></button>';
-            html += '<button class="btn btn-default task-delete-button" type="button"><i class="fa fa-times" aria-hidden="true"></i></button>';
-            html += '</span></div></div></div>';
-
-            $('#tasks-items-area').append(html);
-            $('#add-task-bar').html('');
-
-            ProductiveData['taskData'].push(taskText);
-            ProductiveData['numTasks']++;
-            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-
-            if (!ProductiveData['numTasks']) {
-                $('#empty-tasks').css('display', 'block');
-            } else {
-                $('#empty-tasks').css('display', 'none');
-            }
-
-            $('.task-delete-button').click(function() {
-                $(this).parent().parent().fadeOut();
-            });
 
 
 
 
-        }
-    });
+
+
+
+
 
 
 
