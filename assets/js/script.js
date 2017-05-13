@@ -17,14 +17,14 @@ $(document).ready(function() {
             } else {
                 var cache = {
                         'numTasks': 0,
-                        'taskData': [],
+                        'taskData': {},
                         'initTasksTimestamp': [],
                         'noteText': '',
                         'totalTasksCreated': 0,
                         'totalTasksCompleted': 0,
                         'totalTasksDeleted': 0,
                         'numLinks': 0,
-                        'linkData': [],
+                        'linkData': {},
                         'initLinksTimestamp': []
                     };
 
@@ -79,18 +79,22 @@ $(document).ready(function() {
             $('#empty-tasks').css('display', 'none');
             var html = '';
 
-            for (var i = 0; i < numTasks; i++) {
-                html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
-                html += '<input type="text" class="form-control tasks-item" value="' +
-                    ProductiveData['taskData'][i]['text'] + '" disabled>';
-                html += '<span class="input-group-btn">';
-                html += '<button class="btn btn-default task-complete-button" type="button" data-timestamp="' +
-                    ProductiveData['taskData'][i]['timestamp'] + '"><i class="fa fa-check" aria-hidden="true"></i></button>';
-                html += '<button class="btn btn-default task-delete-button" type="button" data-timestamp="' +
-                    ProductiveData['taskData'][i]['timestamp'] + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
-                html += '</span></div></div></div>';
+            ProductiveData['initTasksTimestamp'] = [];
 
-                ProductiveData['initTasksTimestamp'].push(ProductiveData['taskData'][i]['timestamp']);
+            for (var property in ProductiveData['taskData']) {
+                if (ProductiveData['taskData'].hasOwnProperty(property)) {
+                    html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+                    html += '<input type="text" class="form-control tasks-item" value="' +
+                        ProductiveData['taskData'][property]['text'] + '" disabled>';
+                    html += '<span class="input-group-btn">';
+                    html += '<button class="btn btn-default task-complete-button" type="button" data-timestamp="' +
+                        property + '"><i class="fa fa-check" aria-hidden="true"></i></button>';
+                    html += '<button class="btn btn-default task-delete-button" type="button" data-timestamp="' +
+                        property + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                    html += '</span></div></div></div>';
+
+                    ProductiveData['initTasksTimestamp'].push(property);
+                }
             }
 
             localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
@@ -107,9 +111,7 @@ $(document).ready(function() {
             $(this).css('cursor', 'default');
             $(this).parent().parent().parent().parent().fadeOut();
 
-            ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
-               return e['timestamp'] !== timestamp;
-            });
+            delete ProductiveData['taskData'][timestamp];
 
             ProductiveData['totalTasksCompleted']++;
             ProductiveData['numTasks']--;
@@ -133,9 +135,7 @@ $(document).ready(function() {
             $(this).css('cursor', 'default');
             $(this).parent().parent().parent().parent().fadeOut();
 
-            ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
-                return e['timestamp'] !== timestamp;
-            });
+            delete ProductiveData['taskData'][timestamp];
 
             ProductiveData['totalTasksDeleted']++;
             ProductiveData['numTasks']--;
@@ -170,10 +170,12 @@ $(document).ready(function() {
             $('#tasks-items-area').append(html);
             $('#add-task-bar').html('');
 
-            ProductiveData['taskData'].push({
-                'text': taskText,
-                'timestamp': timestamp
-            });
+            timestamp = String(timestamp);
+
+            ProductiveData['taskData'][timestamp] = {
+                'text': taskText
+            };
+
             ProductiveData['totalTasksCreated']++;
             ProductiveData['numTasks']++;
             localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
@@ -184,9 +186,7 @@ $(document).ready(function() {
                 $(this).css('cursor', 'default');
                 $(this).parent().parent().parent().parent().fadeOut();
 
-                ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
-                    return e['timestamp'] !== timestamp;
-                });
+                delete ProductiveData['taskData'][timestamp];
 
                 ProductiveData['totalTasksCompleted']++;
                 ProductiveData['numTasks']--;
@@ -205,9 +205,7 @@ $(document).ready(function() {
                 $(this).css('cursor', 'default');
                 $(this).parent().parent().parent().parent().fadeOut();
 
-                ProductiveData['taskData'] = ProductiveData['taskData'].filter(function(e) {
-                    return e['timestamp'] !== timestamp;
-                });
+                delete ProductiveData['taskData'][timestamp];
 
                 ProductiveData['totalTasksDeleted']++;
                 ProductiveData['numTasks']--;
@@ -251,134 +249,7 @@ $(document).ready(function() {
     });
 
 
-
-
-
-
-
-
-
-
-
-
-    function displayLinks() {
-        var numLinks = ProductiveData['numLinks'];
-
-        if (!numLinks) {
-            $('#empty-links').css('display', 'block');
-        } else {
-            $('#empty-links').css('display', 'none');
-            var html = '';
-
-            for (var i = 0; i < numLinks; i++) {
-                html += '<div class="col-md-3 quick-access-link" id="' + ProductiveData['linkData'][i]['id'] + '">';
-                html += '<a class="access-link" href="' + ProductiveData['linkData'][i]['url'] + '">';
-                html += '<div class="access-item">';
-                html += '<div class="access-item-title">' + ProductiveData['linkData'][i]['title'] + '</div>';
-                html += '<div class="access-item-desc">' + ProductiveData['linkData'][i]['desc'] + '</div>';
-                html += '</div></a></div>';
-            }
-
-            $('#quick-access').html(html);
-        }
-    }
-    displayLinks();
-
-
-
-
-
-
-
-
-
-    function displayCurrentLinks() {
-        var numLinks = ProductiveData['numLinks'];
-
-        if (!numLinks) {
-            $('#empty-current-links').css('display', 'block');
-        } else {
-            $('#empty-current-links').css('display', 'none');
-            var html = '';
-
-            for (var i = 0; i < numLinks; i++) {
-                html += '<li class="list-group-item">';
-                html += '<button class="btn btn-default current-links-close" value="' + ProductiveData['linkData'][i]['id'] + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
-                html += '<div class="current-links-item">' + ProductiveData['linkData'][i]['title'] + '</div></li>';
-            }
-
-            $('#current-links').html(html);
-        }
-    }
-    displayCurrentLinks();
-
-
-    function timeAppendZero(i) {
-        if (i < 10) { i = "0" + i }
-        return i;
-    }
-
-
-    function updateTime() {
-        var time = new Date();
-        var hour = time.getHours();
-        var ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour > 12 ? hour - 12 : hour;
-        hour = hour === 0 ? 12 : hour;
-        var min = time.getMinutes();
-        min = timeAppendZero(min);
-        $("#time").html(hour + ':' + min + ' ' + ampm);
-        time = setTimeout(function () {
-            updateTime();
-        }, 500);
-    }
-    updateTime();
-
-
-    function updateDate() {
-        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'];
-        var date = new Date();
-        var month = date.getMonth();
-        var day = date.getDate();
-        var year = date.getFullYear();
-        $('#date').html(monthNames[month] + ' ' + day + ', ' + year);
-    }
-    updateDate();
-
-
-
-
-    /* Tasks Handling */
-
-
-
-
-
-
-
-
-
-
-
-
-    $('#notifications-tab').click(function() {
-        $('#notifications-tab').addClass('active');
-        $('#task-tab').removeClass('active');
-        $('#notes-tab').removeClass('active');
-        $('#analytics-tab').removeClass('active');
-        $('#notifications-container').show();
-        $('#tasks-container').hide();
-        $('#notes-container').hide();
-        $('#analytics-container').hide();
-    });
-
-
-
-
-
-
-    // Analytics Tab
+    // Analytics Tab and Section
     $('#analytics-tab').click(function() {
         $('#notifications-tab').removeClass('active');
         $('#task-tab').removeClass('active');
@@ -396,11 +267,58 @@ $(document).ready(function() {
     });
 
 
-    $.get('http://freegeoip.net/json/', function(response) {
-        var city = response.city;
-        var regionName = getRegionCode(response.region_name);
-        $('#location').html(city + ", " + regionName);
-    }, 'jsonp');
+    // Quick Access Links Section
+    (function initializeLinks() {
+        var numLinks = ProductiveData['numLinks'];
+
+        if (!numLinks) {
+            $('#empty-links').css('display', 'block');
+        } else {
+            $('#empty-links').css('display', 'none');
+            var html = '';
+
+            ProductiveData['initLinksTimestamp'] = [];
+
+            for (var property in ProductiveData['linkData']) {
+                if (ProductiveData['linkData'].hasOwnProperty(property)) {
+
+                    html += '<div class="col-md-3 quick-access-link" data-timestamp="' + property + '">';
+                    html += '<a class="access-link" href="' + ProductiveData['linkData'][property]['url'] + '">';
+                    html += '<div class="access-item">';
+                    html += '<div class="access-item-title">' + ProductiveData['linkData'][property]['title'] + '</div>';
+                    html += '<div class="access-item-desc">' + ProductiveData['linkData'][property]['desc'] + '</div>';
+                    html += '</div></a></div>';
+
+                    ProductiveData['initLinksTimestamp'].push(property);
+                }
+            }
+
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+            $('#quick-access').append(html);
+        }
+    })();
+
+
+    (function initializeCurrentLinks() {
+        var numLinks = ProductiveData['numLinks'];
+
+        if (!numLinks) {
+            $('#empty-current-links').css('display', 'block');
+        } else {
+            $('#empty-current-links').css('display', 'none');
+            var html = '';
+
+            for (var property in ProductiveData['linkData']) {
+                if (ProductiveData['linkData'].hasOwnProperty(property)) {
+                    html += '<li class="list-group-item">';
+                    html += '<button class="btn btn-default current-links-close" data-timestamp="' + property + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
+                    html += '<div class="current-links-item">' + ProductiveData['linkData'][property]['title'] + '</div></li>';
+                }
+            }
+
+            $('#current-links').append(html);
+        }
+    })();
 
 
     $('#manage-open').click(function() {
@@ -415,77 +333,160 @@ $(document).ready(function() {
     });
 
 
-    // Changes LocalStorage
+    (function initializeDeleteLinkButtons() {
+        $('.current-links-close').click(function() {
+           var timestamp = $(this).attr('data-timestamp');
+
+           $(this).prop('disabled', 'true');
+           $(this).css('cursor', 'default');
+           $(this).parent().fadeOut();
+           $('.quick-access-link[data-timestamp="' + timestamp + '"]').fadeOut();
+
+           delete ProductiveData['linkData'][timestamp];
+
+           ProductiveData['numLinks']--;
+
+           localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+           if (ProductiveData['numLinks'] === 0) {
+               $('#empty-links').fadeIn();
+               $('#empty-current-links').fadeIn();
+           } else {
+               $('#empty-links').fadeOut();
+               $('#empty-current-links').fadeOut();
+           }
+        });
+    })();
+
+
     $('#link-button').click(function() {
         var numLinks = ProductiveData['numLinks'];
-        var newLinkURL = $('#link-url').val();
-        var newLinkTitle = $('#link-title').val();
-        var newLinkDesc = $('#link-desc').val();
-        var newID = ProductiveData['buttonLinkID'];
+        var timestamp = Date.now();
+        var url = $('#link-url').val();
+        var title = $('#link-title').val();
+        var desc = $('#link-desc').val();
 
-        if (newLinkURL && newLinkTitle && newLinkDesc) {
-            if (numLinks == MAX_NUM_LINKS) {
-                $('.manage-error').css('display', 'block');
+        if (url && title && desc) {
+            if (numLinks === MAX_NUM_LINKS) {
+                $('#manage-error').css('display', 'block');
                 console.log(ERROR_MAX_NUM_LINKS);
             } else {
-                $('.manage-error').css('display', 'none');
+                $('#manage-error').css('display', 'none');
+                $('#empty-links').css('display', 'none');
+                $('#empty-current-links').css('display', 'none');
 
-                // TO-DO: Convert newLinkURL, newLinkTitle and newLinkDesc
-                // to HTML safe strings
+                var html = '';
 
-                ProductiveData['linkData'].push({
-                    'id': newID,
-                    'url': newLinkURL,
-                    'title': newLinkTitle,
-                    'desc': newLinkDesc
-                });
+                html += '<li class="list-group-item">';
+                html += '<button class="btn btn-default current-links-close" data-timestamp="' + timestamp + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
+                html += '<div class="current-links-item">' + title + '</div></li>';
 
-                ProductiveData['buttonLinkID']++;
+                $('#current-links').append(html);
+
+                html = '';
+
+                html += '<div class="col-md-3 quick-access-link" data-timestamp="' + timestamp + '">';
+                html += '<a class="access-link" href="' + url + '">';
+                html += '<div class="access-item">';
+                html += '<div class="access-item-title">' + title + '</div>';
+                html += '<div class="access-item-desc">' + desc + '</div>';
+                html += '</div></a></div>';
+
+                $('#quick-access').append(html);
+
+                timestamp = String(timestamp);
+
+                ProductiveData['linkData'][timestamp] = {
+                    'url': url,
+                    'title': title,
+                    'desc': desc
+                };
+
                 ProductiveData['numLinks']++;
-
                 localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-                displayLinks(); // Update links
-                displayCurrentLinks(); // Update current links
 
-                $('.current-links-close').click(function() {
-                    $(this).prop('disabled', true);
+
+                $('.current-links-close[data-timestamp="' + timestamp + '"]').click(function() {
+                    $(this).prop('disabled', 'true');
                     $(this).css('cursor', 'default');
+                    $(this).parent().fadeOut();
+                    $('.quick-access-link[data-timestamp="' + timestamp + '"]').fadeOut();
 
-                    var numLinks = ProductiveData['numLinks'];
-                    var id = $(this).attr('value');
-
-                    // Remove from Current Links
-                    $(this).closest('.list-group-item').fadeOut(250);
-
-                    ProductiveData['linkData'] = $.grep(ProductiveData['linkData'], function(e) {
-                        return e['id'] != id;
-                    });
+                    delete ProductiveData['linkData'][timestamp];
 
                     ProductiveData['numLinks']--;
 
-                    // Refresh Quick Access
-                    $('.quick-access-link').each(function() {
-                        $(this).hide();
-                    });
-
-                    if (ProductiveData['numLinks'] == 0) {
-                        $('#empty-current-links').css('display', 'block');
-                    } else {
-                        $('#empty-current-links').css('display', 'none');
-                    }
-
-                    displayLinks();
-
                     localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
-                    console.log(SUCCESS_DELETE_LINK + id);
+                    if (ProductiveData['numLinks'] === 0) {
+                        $('#empty-links').fadeIn();
+                        $('#empty-current-links').fadeIn();
+                    } else {
+                        $('#empty-links').fadeOut();
+                        $('#empty-current-links').fadeOut();
+                    }
                 });
 
-                console.log(SUCCESS_NEW_LINK + newID + ', ' + newLinkURL + ', ' + newLinkTitle + ', ' + newLinkDesc);
+                console.log(SUCCESS_NEW_LINK + timestamp + ', ' + url + ', ' + title + ', ' + desc);
             }
         } else {
             console.log(ERROR_NEW_LINK);
         }
     });
+
+
+    // Time and Date
+    function timeAppendZero(i) {
+        if (i < 10) { i = "0" + i }
+        return i;
+    }
+
+
+    (function updateTime() {
+        var time = new Date();
+        var hour = time.getHours();
+        var ampm = hour >= 12 ? 'PM' : 'AM';
+        hour = hour > 12 ? hour - 12 : hour;
+        hour = hour === 0 ? 12 : hour;
+        var min = time.getMinutes();
+        min = timeAppendZero(min);
+        $("#time").html(hour + ':' + min + ' ' + ampm);
+        time = setTimeout(function () {
+            updateTime();
+        }, 500);
+    })();
+
+
+    (function updateDate() {
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        var date = new Date();
+        var month = date.getMonth();
+        var day = date.getDate();
+        var year = date.getFullYear();
+        $('#date').html(monthNames[month] + ' ' + day + ', ' + year);
+    })();
+
+
+    // Notifications Tab and Section
+    $('#notifications-tab').click(function() {
+        $('#notifications-tab').addClass('active');
+        $('#task-tab').removeClass('active');
+        $('#notes-tab').removeClass('active');
+        $('#analytics-tab').removeClass('active');
+        $('#notifications-container').show();
+        $('#tasks-container').hide();
+        $('#notes-container').hide();
+        $('#analytics-container').hide();
+    });
+
+
+    // Location
+    $.get('http://freegeoip.net/json/', function(response) {
+        var city = response.city;
+        var regionName = getRegionCode(response.region_name);
+        $('#location').html(city + ", " + regionName);
+    }, 'jsonp');
+
 
 });

@@ -108,7 +108,7 @@ html, body {
     height: 22.5em;
     background-color: #fff;
     opacity: 0.75;
-    display: none;
+    display: block;
     border-radius: 1em;
     border-top-left-radius: 0;
 }
@@ -124,13 +124,11 @@ html, body {
     text-align: left;
 }
 
-
-
 #tasks-container {
     height: 22.5em;
     background-color: #fff;
     opacity: 0.75;
-    display: block;
+    display: none;
     border-radius: 1em;
     border-top-left-radius: 0;
     overflow: scroll;
