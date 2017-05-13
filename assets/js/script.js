@@ -485,8 +485,13 @@ $(document).ready(function() {
     $.get('http://freegeoip.net/json/', function(response) {
         var city = response.city;
         var regionName = getRegionCode(response.region_name);
-        $('#location').html(city + ", " + regionName);
+        var location = city + ', ' + regionName;
+        $('#location').html(location);
     }, 'jsonp');
+
+
+
+
 
 
 });
