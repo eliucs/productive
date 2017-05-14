@@ -490,7 +490,40 @@ $(document).ready(function() {
     }, 'jsonp');
 
 
+    //Weather
+    (function updateWeather() {
+        var ipAPI = 'http://ip-api.com/json';
 
+        $.getJSON(ipAPI, function(json) {
+            var latitude = json.lat;
+            var longitude = json.lon;
+            // Change App ID
+            var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
+
+            $.getJSON(weatherAPI, function(json) {
+                console.log(json);
+
+                var kelvinTemp = json.main.temp;
+                var celsiusTemp = Math.round((kelvinTemp - 273).toFixed(2));
+                var weatherCode = json.weather[0].id;
+                var weatherIcon = '';
+
+                if (weatherCode >= 200 && weatherCode < 300) {
+                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                } else if (weatherCode >= 300 && weatherCode < 400) {
+                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                } else if (weatherCode >= 300 && weatherCode < 400) {
+                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                } else if (weatherCode >= 300 && weatherCode < 400) {
+                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                } else if (weatherCode >= 500 && weatherCode < 600) {
+                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                }
+
+                $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
+            });
+        });
+    })();
 
 
 
