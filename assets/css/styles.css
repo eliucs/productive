@@ -51,8 +51,6 @@ html, body {
     overflow: hidden;
 }
 
-
-/* Search Styles */
 .search-container {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
@@ -69,8 +67,6 @@ html, body {
     border-radius: 1em !important;
 }
 
-
-/* Notifications, Tasks, Notes, Analytics Styles */
 .task-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
@@ -103,7 +99,6 @@ html, body {
     opacity: 0.75 !important;
 }
 
-
 #notifications-container {
     height: 22.5em;
     background-color: #fff;
@@ -131,7 +126,8 @@ html, body {
     display: none;
     border-radius: 1em;
     border-top-left-radius: 0;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .empty-tasks-title {
@@ -163,8 +159,6 @@ html, body {
     background-color: #fff;
     cursor: default;
 }
-
-
 
 #notes-container {
     height: 22.5em;
@@ -218,7 +212,6 @@ html, body {
     color: #222;
 }
 
-/* Quick Access Styles */
 .access-container {
     margin-top: 1.9em;
 }
@@ -305,16 +298,6 @@ html, body {
     color: #222;
 }
 
-
-/* Option Bar, Date, Time, Weather, Location Styles */
-
-/*
-@media all and (max-height: 450px) {
-    .secondary-section {
-        display: none;
-    }
-}*/
-
 .secondary-section {
     position: fixed;
     width: 100%;
@@ -357,9 +340,9 @@ html, body {
 
 .weather-container {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-weight: 700;
+    font-weight: 100;
     font-style: normal;
-    font-size: 5em;
+    font-size: 3em;
     color: #fff;
     text-align: right;
 }
@@ -373,7 +356,6 @@ html, body {
     text-align: right;
 }
 
-/* Manage Section Styles */
 .manage-container {
     margin: 0;
     padding: 0;
@@ -472,8 +454,6 @@ html, body {
     color: #222;
 }
 
-
-/* Current Shortcuts Section */
 .current-links-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 200;
@@ -515,12 +495,3 @@ html, body {
     color: #222;
     display: inline;
 }
-
-.weather-container {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    font-weight: 100;
-    font-style: normal;
-    font-size: 3em;
-    color: #fff;
-}
-
