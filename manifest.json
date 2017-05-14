@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Productive",
+  "version": "1.0.0",
+  "description": "An extension to help keep track of tasks, notes, shortcuts and productivity.",
+  "browser_action": {
+    "default_icon": "assets/img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/tether.min.js",
+      "assets/js/bootstrap.min.js",
+      "assets/js/jquery-3.2.1.min.js",
+      "assets/js/modernizr.min.js",
+      "assets/js/simpleWeather.min.js",
+      "assets/js/string.js",
+      "assets/js/script.js"
+    ]
+  },
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
