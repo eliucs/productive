@@ -458,13 +458,16 @@ $(document).ready(function() {
 
 
     (function updateDate() {
+        var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',' Thursday',
+            'Friday', 'Saturday'];
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'];
         var date = new Date();
+        var dayOfTheWeek = date.getDay();
         var month = date.getMonth();
         var day = date.getDate();
         var year = date.getFullYear();
-        $('#date').html(monthNames[month] + ' ' + day + ', ' + year);
+        $('#date').html(dayNames[dayOfTheWeek] + ', ' + monthNames[month] + ' ' + day + ', ' + year);
     })();
 
 
@@ -501,8 +504,6 @@ $(document).ready(function() {
             var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
 
             $.getJSON(weatherAPI, function(json) {
-                console.log(json);
-
                 var date = new Date();
                 var hour = date.getHours();
                 var kelvinTemp = json.main.temp;
