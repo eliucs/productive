@@ -503,21 +503,73 @@ $(document).ready(function() {
             $.getJSON(weatherAPI, function(json) {
                 console.log(json);
 
+                var date = new Date();
+                var hour = date.getHours();
                 var kelvinTemp = json.main.temp;
                 var celsiusTemp = Math.round((kelvinTemp - 273).toFixed(2));
                 var weatherCode = json.weather[0].id;
                 var weatherIcon = '';
 
-                if (weatherCode >= 200 && weatherCode < 300) {
+                if ((weatherCode >= 200 && weatherCode <= 202) ||
+                    (weatherCode >= 230 && weatherCode <= 232)) {
+                    // Thunderstorm with rain
+                    weatherIcon = '<span class="pe-7w-lightning-rain pe-3x pe-va"></span>';
+                } else if (weatherCode >= 211 && weatherCode <= 221) {
+                    // Thunderstorm
+                    weatherIcon = '<span class="pe-7w-lightning pe-3x pe-va"></span>';
+                } else if (weatherCode >= 300 && weatherCode <= 321) {
+                    // Drizzle
                     weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
-                } else if (weatherCode >= 300 && weatherCode < 400) {
-                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
-                } else if (weatherCode >= 300 && weatherCode < 400) {
-                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
-                } else if (weatherCode >= 300 && weatherCode < 400) {
-                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
-                } else if (weatherCode >= 500 && weatherCode < 600) {
-                    weatherIcon = '<span class="pe-7w-drizzle pe-3x pe-va"></span>';
+                } else if (weatherCode >= 500 && weatherCode <= 531) {
+                    // Rain
+                    weatherIcon = '<span class="pe-7w-rain-alt pe-3x pe-va"></span>';
+                } else if (weatherCode >= 600 && weatherCode <= 612) {
+                    // Snow
+                    weatherIcon = '<span class="pe-7w-snow-alt pe-3x pe-va"></span>';
+                } else if (weatherCode >= 615 && weatherCode <= 622) {
+                    // Snow with rain
+                    weatherIcon = '<span class="pe-7w-snow pe-3x pe-va"></span>';
+                } else if (weatherCode >= 700 && weatherCode <= 771) {
+                    // Fog
+                    weatherIcon = '<span class="pe-7w-fog pe-3x pe-va"></span>';
+                } else if (weatherCode === 781 || weatherCode === 900 ||
+                           weatherCode === 901 || weatherCode === 902) {
+                    // Tornado
+                    weatherIcon = '<span class="pe-7w-hurricane pe-3x pe-va"></span>';
+                } else if (weatherCode === 800 &&
+                           (hour >= 8 && hour <= 17)) {
+                    // Clear sun
+                    weatherIcon = '<span class="pe-7w-sun pe-3x pe-va"></span>';
+                } else if (weatherCode === 800) {
+                    // Clear moon
+                    weatherIcon = '<span class="pe-7w-moon pe-3x pe-va"></span>';
+                } else if (weatherCode >= 801 && weatherCode <= 804) {
+                    // Cloudy
+                    weatherIcon = '<span class="pe-7w-cloud pe-3x pe-va"></span>';
+                } else if (weatherCode === 903) {
+                    // Cold
+                    weatherIcon = '<span class="pe-7w-thermometer-0 pe-3x pe-va"></span>';
+                } else if (weatherCode === 904) {
+                    // Hot
+                    weatherIcon = '<span class="pe-7w-sun pe-3x pe-va"></span>';
+                } else if (weatherCode === 905) {
+                    // Windy
+                    weatherIcon = '<span class="pe-7w-wind pe-3x pe-va"></span>';
+                } else if (weatherCode === 906) {
+                    // Hail
+                    weatherIcon = '<span class="pe-7w-hail pe-3x pe-va"></span>';
+                } else if (weatherCode >= 951 && weatherCode <= 960) {
+                    // Breeze, windy, gale
+                    weatherIcon = '<span class="pe-7w-cloud-wind pe-3x pe-va"></span>';
+                } else if (weatherCode === 961) {
+                    // Violent storm
+                    weatherIcon = '<span class="pe-7w-light pe-3x pe-va"></span>';
+                } else if (weatherCode === 962) {
+                    // Hurricane
+                    weatherIcon = '<span class="pe-7w-hurricane pe-3x pe-va"></span>';
+                } else {
+                    // Error
+                    weatherIcon = '<span class="pe-7w-compass pe-3x pe-va">Error</span>';
                 }
 
                 $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
