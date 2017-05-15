@@ -47,8 +47,22 @@ $(document).ready(function() {
             searchText = encodeURIComponent(searchText.toLowerCase());
 
             if (searchText) {
+                var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
+
                 console.log(SUCCESS_SEARCH + searchText);
-                window.location.href = URL_GOOGLE + searchText;
+                console.log(urlPattern.test(searchText))
+                // Test if URL
+                if (urlPattern.test(searchText)) {
+                    // Navigate to URL
+                    if (/^(?:(?:https?|ftp):\/\/).*/i.test(searchText)) {
+                        window.location.href = searchText;
+                    } else {
+                        window.location.href = "http://" + searchText;
+                    }
+                }
+                else {
+                    window.location.href = URL_GOOGLE + searchText;
+                }
             } else {
                 console.log(ERROR_SEARCH);
             }
