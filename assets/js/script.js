@@ -40,8 +40,6 @@ $(document).ready(function() {
 
     // Search Bar
     $('#search-bar').keypress(function(e){
-        // catch URLs
-        var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
 
         // Triggers Google Search on 'Enter' key pressed
         if (e.which == KEY_ENTER) {
@@ -49,15 +47,17 @@ $(document).ready(function() {
             searchText = encodeURIComponent(searchText.toLowerCase());
 
             if (searchText) {
-                console.log(SUCCESS_SEARCH + searchText);
+                var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
 
+                console.log(SUCCESS_SEARCH + searchText);
+                console.log(urlPattern.test(searchText))
                 // Test if URL
-                if (urlPatter.test(searchText)) {
+                if (urlPattern.test(searchText)) {
                     // Navigate to URL
-                    if (/^(?:(?:https?|ftp):\/\/).*/i.test(address)) {
-                        document.location.href = address;
+                    if (/^(?:(?:https?|ftp):\/\/).*/i.test(searchText)) {
+                        window.location.href = searchText;
                     } else {
-                        document.location.href = "http://" + address;
+                        window.location.href = "http://" + searchText;
                     }
                 }
                 else {
