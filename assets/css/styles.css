@@ -328,6 +328,7 @@ html, body {
     font-style: normal;
     font-size: 5em;
     color: #fff;
+    cursor: pointer;
 }
 
 .date-container {

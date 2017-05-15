@@ -16,6 +16,8 @@ $(document).ready(function() {
                 console.log(SUCCESS_DATA_LOADED);
             } else {
                 var cache = {
+                        'defaultTimeFormat': '12',
+                        'defaultTempUnits': 'C',
                         'numTasks': 0,
                         'taskData': {},
                         'initTasksTimestamp': [],
@@ -446,7 +448,11 @@ $(document).ready(function() {
         var time = new Date();
         var hour = time.getHours();
         var ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour > 12 ? hour - 12 : hour;
+
+        if (ProductiveData['defaultTimeFormat'] == '12') {
+            hour = hour > 12 ? hour - 12 : hour;
+        }
+
         hour = hour === 0 ? 12 : hour;
         var min = time.getMinutes();
         min = timeAppendZero(min);
@@ -484,6 +490,11 @@ $(document).ready(function() {
     });
 
 
+    function convertCelsiusToFahrenheit(temp) {
+        return Math.round(1.8 * temp + 32);
+    }
+
+
     //Location and Weather
     (function updateWeather() {
         var ipAPI = 'http://ip-api.com/json';
@@ -504,6 +515,7 @@ $(document).ready(function() {
                 var hour = date.getHours();
                 var kelvinTemp = json.main.temp;
                 var celsiusTemp = Math.round((kelvinTemp - 273).toFixed(2));
+                var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
                 var weatherCode = json.weather[0].id;
                 var weatherIcon = '';
 
@@ -571,7 +583,12 @@ $(document).ready(function() {
                     weatherIcon = '<span class="pe-7w-compass pe-3x pe-va">Error</span>';
                 }
 
-                $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
+                if (ProductiveData['defaultTempUnits'] == 'C') {
+                    $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
+                } else {
+                    $('#weather').html(fahrenTemp + '&deg;F&nbsp;' + weatherIcon);
+                }
+
             });
         });
     })();

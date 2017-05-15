@@ -3,13 +3,12 @@
   "name": "Productive",
   "version": "1.0.0",
   "description": "An extension to help keep track of tasks, notes, shortcuts and productivity.",
+  "author": "Eric Liu",
   "icons": {
     "16": "assets/img/icon-16x16.png",
     "48": "assets/img/icon-48x48.png",
     "128": "assets/img/icon-128x128.png"
   },
-
-
   "browser_action": {
     "default_icon": "assets/img/icon-128x128.png"
   },
@@ -30,5 +29,6 @@
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/"
-  ]
+  ],
+  "short_name": "Productive"
 }
