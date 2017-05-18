@@ -558,6 +558,7 @@ html, body {
 }
 
 .option-item {
+    min-width: 7em;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
@@ -565,7 +566,7 @@ html, body {
     font-style: normal;
     font-size: 1.5em;
     color: #222;
-    text-align: right;
+    text-align: center;
 }
 
 .option-save {

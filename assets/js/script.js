@@ -704,4 +704,9 @@ $(document).ready(function() {
         $('#option-save-title').fadeIn();
     });
 
+    $('#option-reset').click(function() {
+       localStorage.clear();
+       location.reload();
+    });
+
 });
