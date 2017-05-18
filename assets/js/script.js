@@ -202,7 +202,7 @@ $(document).ready(function() {
             html += '</span></div></div></div>';
 
             $('#tasks-items-area').append(html);
-            $('#add-task-bar').html('');
+            $('#add-task-form')[0].reset();
 
             timestamp = String(timestamp);
 
@@ -254,6 +254,47 @@ $(document).ready(function() {
             });
         }
     });
+
+
+    /*
+    $('#add-task-bar').keypress(function(e){
+        // Triggers Google Search on 'Enter' key pressed
+        if (e.which == KEY_ENTER) {
+            var searchText = $('#search-bar').val();
+            searchText = encodeURIComponent(searchText.toLowerCase());
+
+            if (searchText) {
+                var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
+
+                console.log(SUCCESS_SEARCH + searchText);
+
+                // Test if URL
+                if (urlPattern.test(searchText)) {
+                    // Navigate to URL
+                    nav(searchText);
+                }
+                else {
+                    var isQuickAccess = false;
+                    // Check if searchText is a quick acess
+                    for (var property in ProductiveData['linkData']) {
+                        if (ProductiveData['linkData'].hasOwnProperty(property) &&
+                            ProductiveData['linkData'][property]['title'].toLowerCase() == searchText.toLowerCase()) {
+                            isQuickAccess = true;
+                            nav(ProductiveData['linkData'][property]['url']);
+                        }
+                    }
+                    if (!isQuickAccess) {
+                        window.location.href = URL_GOOGLE + searchText;
+                    }
+                }
+            } else {
+                console.log(ERROR_SEARCH);
+            }
+        }
+    });*/
+
+
+
 
 
     // Notes Tab and Section

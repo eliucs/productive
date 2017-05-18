@@ -153,6 +153,8 @@ html, body {
     font-style: normal;
     font-size: 1em;
     color: #222;
+    border-top-left-radius: 0.5em !important;
+    border-bottom-left-radius: 0.5em !important;
 }
 
 .tasks-item:disabled {
