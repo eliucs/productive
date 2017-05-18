@@ -480,7 +480,6 @@ $(document).ready(function() {
                 $('#manage-error').css('display', 'block');
                 console.log(ERROR_MAX_NUM_LINKS);
             } else if (!urlPattern.test(url)) {
-
                 $('#manage-error').css('display', 'none');
                 $('#url-error').css('display', 'block');
                 console.log(ERROR_INVALID_URL);
@@ -508,6 +507,9 @@ $(document).ready(function() {
                 html += '</div></a></div>';
 
                 $('#quick-access').append(html);
+                $('.link-input').each(function() {
+                    $(this)[0].reset();
+                });
 
                 timestamp = String(timestamp);
 
@@ -548,7 +550,7 @@ $(document).ready(function() {
             console.log(ERROR_NEW_LINK);
         }
     });
-
+    
 
     // Time and Date
     function timeAppendZero(i) {
