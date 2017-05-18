@@ -29,7 +29,7 @@ $(document).ready(function() {
                         'linkData': {},
                         'initLinksTimestamp': [],
                         'lastCachedLocation': '',
-                        'lastCachedTemp': '',
+                        'lastCachedTemp': KELVIN_CELSIUS_DIFF,
                         'lastCachedWeatherCode': 0
                     };
 
@@ -633,6 +633,7 @@ $(document).ready(function() {
 
                 ProductiveData['lastCachedTemp'] = kelvinTemp;
                 ProductiveData['lastCachedWeatherCode'] = weatherCode;
+                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
                 if (ProductiveData['defaultTempUnits'] == 'C') {
                     $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
@@ -641,7 +642,6 @@ $(document).ready(function() {
                 } else if (ProductiveData['defaultTempUnits'] == 'K') {
                     $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
-
             });
         }).fail(function() {
             console.log(ERROR_LOCATION);
