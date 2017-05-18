@@ -25,3 +25,4 @@ const ERROR_SEARCH = 'Error: No search term entered.';
 const ERROR_LOCATION = 'Error: Problem retrieving weather.';
 const ERROR_NEW_LINK = 'Error: All fields must be filled out.';
 const ERROR_MAX_NUM_LINKS = 'Error: Maximum number of links reached (12).';
+const ERROR_INVALID_URL = 'Error: Invalid URL entered.';

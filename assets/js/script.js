@@ -465,8 +465,9 @@ $(document).ready(function() {
         });
     })();
 
-
     $('#link-button').click(function() {
+
+        var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
         var numLinks = ProductiveData['numLinks'];
         var timestamp = Date.now();
         var url = $('#link-url').val();
@@ -475,10 +476,17 @@ $(document).ready(function() {
 
         if (url && title && desc) {
             if (numLinks === MAX_NUM_LINKS) {
+                $('#url-error').css('display', 'none');
                 $('#manage-error').css('display', 'block');
                 console.log(ERROR_MAX_NUM_LINKS);
+            } else if (!urlPattern.test(url)) {
+
+                $('#manage-error').css('display', 'none');
+                $('#url-error').css('display', 'block');
+                console.log(ERROR_INVALID_URL);
             } else {
                 $('#manage-error').css('display', 'none');
+                $('#url-error').css('display', 'none');
                 $('#empty-links').css('display', 'none');
                 $('#empty-current-links').css('display', 'none');
 
