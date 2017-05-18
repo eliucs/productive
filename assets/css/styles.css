@@ -328,7 +328,6 @@ html, body {
     font-style: normal;
     font-size: 5em;
     color: #fff;
-    cursor: pointer;
 }
 
 .date-container {
@@ -495,4 +494,88 @@ html, body {
     font-size: 1.25em;
     color: #222;
     display: inline;
+}
+
+/* Option Section Container */
+.option-section-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 99;
+    display: none;
+}
+
+.option-close-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    z-index: 999;
+}
+
+.option-close {
+    font-size: 2em;
+    color: #222 !important;
+    cursor: pointer;
+}
+
+.option-close:hover {
+    color: rgba(81, 203, 238, 1) !important;
+}
+
+.option-area-container {
+    height: 9999em;
+    background-color: #fff;
+    opacity: 0.95;
+    overflow-y: hidden;
+}
+
+.option-item-row {
+    margin-bottom: 1.5em;
+}
+
+.option-title {
+    margin-top: 0.5em;
+    margin-bottom: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 5em;
+    color: #222;
+    text-align: center;
+}
+
+.option-item-title {
+    margin-right: 0.5em;
+    margin-top: 0.1em;
+    margin-bottom: 0.25em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #222;
+    text-align: right;
+}
+
+.option-item {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #222;
+    text-align: right;
+}
+
+.option-save {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #008000;
+    text-align: center;
+    display: none;
 }

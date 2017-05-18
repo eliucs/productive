@@ -16,7 +16,7 @@ $(document).ready(function() {
                 console.log(SUCCESS_DATA_LOADED);
             } else {
                 var cache = {
-                        'defaultTimeFormat': '12',
+                        'defaultTimeFormat': TIME_12_HR_AMPM,
                         'defaultTempUnits': 'C',
                         'numTasks': 0,
                         'taskData': {},
@@ -478,14 +478,22 @@ $(document).ready(function() {
         var hour = time.getHours();
         var ampm = hour >= 12 ? 'PM' : 'AM';
 
-        if (ProductiveData['defaultTimeFormat'] == '12') {
+        if (ProductiveData['defaultTimeFormat'] == TIME_12_HR ||
+            ProductiveData['defaultTimeFormat'] == TIME_12_HR_AMPM) {
             hour = hour > 12 ? hour - 12 : hour;
         }
 
         hour = hour === 0 ? 12 : hour;
         var min = time.getMinutes();
         min = timeAppendZero(min);
-        $("#time").html(hour + ':' + min + ' ' + ampm);
+
+        if (ProductiveData['defaultTimeFormat'] == TIME_12_HR_AMPM ||
+            ProductiveData['defaultTimeFormat'] == TIME_24_HR_AMPM) {
+            $("#time").html(hour + ':' + min + ' ' + ampm);
+        } else {
+            $("#time").html(hour + ':' + min);
+        }
+
         time = setTimeout(function () {
             updateTime();
         }, 500);
@@ -609,7 +617,7 @@ $(document).ready(function() {
                     weatherIcon = '<span class="pe-7w-hurricane pe-3x pe-va"></span>';
                 } else {
                     // Error
-                    weatherIcon = '<span class="pe-7w-compass pe-3x pe-va">Error</span>';
+                    weatherIcon = '<span class="pe-7w-compass pe-3x pe-va"></span>';
                 }
 
                 if (ProductiveData['defaultTempUnits'] == 'C') {
@@ -621,5 +629,46 @@ $(document).ready(function() {
             });
         });
     })();
+
+
+    $('#option-open').click(function() {
+        $('.option-close').css('display', 'block');
+        $('.option-section-container').fadeIn();
+    });
+
+
+    $('#option-close').click(function() {
+        $('.option-close').css('display', 'none');
+        $('.option-section-container').fadeOut();
+        $('#option-save-title').css('display', 'none');
+    });
+
+
+    $('#option-save').click(function() {
+        var timeFormat = $('#option-time').val();
+        var tempUnits = $('#option-weather').val();
+
+        if (timeFormat == '12 hr.') {
+            ProductiveData['defaultTimeFormat'] = TIME_12_HR;
+        } else if (timeFormat == '12 hr. with AM/PM') {
+            ProductiveData['defaultTimeFormat'] = TIME_12_HR_AMPM;
+        } else if (timeFormat == '24 hr.') {
+            ProductiveData['defaultTimeFormat'] = TIME_24_HR;
+        } else if (timeFormat == '24 hr. with AM/PM') {
+            ProductiveData['defaultTimeFormat'] = TIME_24_HR_AMPM;
+        }
+
+        if (tempUnits == 'Celsius') {
+            ProductiveData['defaultTempUnits'] = 'C';
+        } else if (tempUnits == 'Fahrenheit') {
+            ProductiveData['defaultTempUnits'] = 'F';
+        } else if (tempUnits == 'Kelvin') {
+            ProductiveData['defaultTempUnits'] = 'K';
+        }
+
+        localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+        $('#option-save-title').fadeIn();
+    });
 
 });

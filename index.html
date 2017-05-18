@@ -165,10 +165,10 @@
             <div class="option-bar-container">
                 <div class="col-md-1">
                     <div class="row">
-                        <div class="col-md-12 option-container"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
+                        <div class="col-md-12 option-container"><a id="option-open" href="#"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 option-container"><a href="https://chrome.google.com/webstore/category/extensions"><i class="fa fa-star-o" aria-hidden="true"></i></a></div>
+                        <div class="col-md-12 option-container"><a href="https://chrome.google.com/webstore/detail/productive/mbajcbhcbcbdianjgagmnbgnjmhoaooa"><i class="fa fa-star-o" aria-hidden="true"></i></a></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 option-container"><a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i></a></div>
@@ -310,6 +310,86 @@
             </div>
         </div>
     </section>
+
+    <!-- Options Section -->
+    <section class="option-section-container">
+        <div class="option-close-container">
+            <div id="option-close" class="option-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <!-- Option Area Section -->
+        <div class="container-fluid option-area-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="option-title">Options</div>
+                </div>
+            </div>
+
+            <div class="row option-item-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div id="option-save-title" class="option-save">
+                        Your changes have been saved.
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row option-item-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="option-item-title">
+                        Change default time format
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select id="option-time" class="form-control option-item">
+                        <option>12 hr.</option>
+                        <option>12 hr. with AM/PM</option>
+                        <option>24 hr.</option>
+                        <option>24 hr. with AM/PM</option>
+                    </select>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row option-item-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="option-item-title">
+                        Change default temperature units
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select id="option-weather" class="form-control option-item">
+                        <option>Celsius</option>
+                        <option>Fahrenheit</option>
+                        <option>Kelvin</option>
+                    </select>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            <div class="row option-item-row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="option-item-title">
+                        Save changes
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button id="option-save" class="btn btn-default option-item">Save</button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+        </div>
+    </section>
+
+
+
 
     <!-- jQuery 3.2.1 -->
     <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>

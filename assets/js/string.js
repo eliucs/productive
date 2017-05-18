@@ -3,6 +3,11 @@
 const MAX_NUM_LINKS = 12;
 const KEY_ENTER = 13;
 const URL_GOOGLE = 'https://google.com/#q=';
+const TIME_12_HR = 1;
+const TIME_12_HR_AMPM = 2;
+const TIME_24_HR = 3;
+const TIME_24_HR_AMPM = 4;
+
 
 // Success
 const SUCCESS_LOCAL_STORAGE = 'Success: LocalStorage compatible.';
