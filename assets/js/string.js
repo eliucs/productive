@@ -22,6 +22,6 @@ const SUCCESS_DELETE_LINK = 'Deleted: ';
 // Error
 const ERROR_LOCAL_STORAGE = 'Error: LocalStorage not available.';
 const ERROR_SEARCH = 'Error: No search term entered.';
-const ERROR_WEATHER = 'Error: Problem retrieving weather.';
+const ERROR_LOCATION = 'Error: Problem retrieving weather.';
 const ERROR_NEW_LINK = 'Error: All fields must be filled out.';
 const ERROR_MAX_NUM_LINKS = 'Error: Maximum number of links reached (12).';
