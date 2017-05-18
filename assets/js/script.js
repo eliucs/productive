@@ -476,14 +476,17 @@ $(document).ready(function() {
 
         if (url && title && desc) {
             if (numLinks === MAX_NUM_LINKS) {
+                $('#link-error').css('display', 'none');
                 $('#url-error').css('display', 'none');
                 $('#manage-error').css('display', 'block');
                 console.log(ERROR_MAX_NUM_LINKS);
             } else if (!urlPattern.test(url)) {
+                $('#link-error').css('display', 'none');
                 $('#manage-error').css('display', 'none');
                 $('#url-error').css('display', 'block');
                 console.log(ERROR_INVALID_URL);
             } else {
+                $('#link-error').css('display', 'none');
                 $('#manage-error').css('display', 'none');
                 $('#url-error').css('display', 'none');
                 $('#empty-links').css('display', 'none');
@@ -547,10 +550,103 @@ $(document).ready(function() {
                 console.log(SUCCESS_NEW_LINK + timestamp + ', ' + url + ', ' + title + ', ' + desc);
             }
         } else {
+            $('#link-error').css('display', 'block');
             console.log(ERROR_NEW_LINK);
         }
     });
-    
+
+
+    $('#link-url, #link-title, #link-desc').keypress(function(e) {
+        if (e.which == KEY_ENTER) {
+            var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
+            var numLinks = ProductiveData['numLinks'];
+            var timestamp = Date.now();
+            var url = $('#link-url').val();
+            var title = $('#link-title').val();
+            var desc = $('#link-desc').val();
+
+            if (url && title && desc) {
+                if (numLinks === MAX_NUM_LINKS) {
+                    $('#link-error').css('display', 'none');
+                    $('#url-error').css('display', 'none');
+                    $('#manage-error').css('display', 'block');
+                    console.log(ERROR_MAX_NUM_LINKS);
+                } else if (!urlPattern.test(url)) {
+                    $('#link-error').css('display', 'none');
+                    $('#manage-error').css('display', 'none');
+                    $('#url-error').css('display', 'block');
+                    console.log(ERROR_INVALID_URL);
+                } else {
+                    $('#link-error').css('display', 'none');
+                    $('#manage-error').css('display', 'none');
+                    $('#url-error').css('display', 'none');
+                    $('#empty-links').css('display', 'none');
+                    $('#empty-current-links').css('display', 'none');
+
+                    var html = '';
+
+                    html += '<li class="list-group-item">';
+                    html += '<button class="btn btn-default current-links-close" data-timestamp="' + timestamp + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
+                    html += '<div class="current-links-item">' + title + '</div></li>';
+
+                    $('#current-links').append(html);
+
+                    html = '';
+
+                    html += '<div class="col-md-3 quick-access-link" data-timestamp="' + timestamp + '">';
+                    html += '<a class="access-link" href="' + url + '">';
+                    html += '<div class="access-item">';
+                    html += '<div class="access-item-title">' + title + '</div>';
+                    html += '<div class="access-item-desc">' + desc + '</div>';
+                    html += '</div></a></div>';
+
+                    $('#quick-access').append(html);
+                    $('.link-input').each(function() {
+                        $(this)[0].reset();
+                    });
+
+                    timestamp = String(timestamp);
+
+                    ProductiveData['linkData'][timestamp] = {
+                        'url': url,
+                        'title': title,
+                        'desc': desc
+                    };
+
+                    ProductiveData['numLinks']++;
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+
+                    $('.current-links-close[data-timestamp="' + timestamp + '"]').click(function() {
+                        $(this).prop('disabled', 'true');
+                        $(this).css('cursor', 'default');
+                        $(this).parent().fadeOut();
+                        $('.quick-access-link[data-timestamp="' + timestamp + '"]').fadeOut();
+
+                        delete ProductiveData['linkData'][timestamp];
+
+                        ProductiveData['numLinks']--;
+
+                        localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                        if (ProductiveData['numLinks'] === 0) {
+                            $('#empty-links').fadeIn();
+                            $('#empty-current-links').fadeIn();
+                        } else {
+                            $('#empty-links').fadeOut();
+                            $('#empty-current-links').fadeOut();
+                        }
+                    });
+
+                    console.log(SUCCESS_NEW_LINK + timestamp + ', ' + url + ', ' + title + ', ' + desc);
+                }
+            } else {
+                $('#link-error').css('display', 'block');
+                console.log(ERROR_NEW_LINK);
+            }
+        }
+    });
+
 
     // Time and Date
     function timeAppendZero(i) {

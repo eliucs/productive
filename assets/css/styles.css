@@ -408,6 +408,17 @@ html, body {
     color: rgba(81, 203, 238, 1) !important;
 }
 
+.link-error {
+    margin-bottom: 1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5em;
+    color: #8b0000;
+    text-align: center;
+    display: none;
+}
+
 .manage-error {
     margin-bottom: 1em;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
