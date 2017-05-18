@@ -27,7 +27,10 @@ $(document).ready(function() {
                         'totalTasksDeleted': 0,
                         'numLinks': 0,
                         'linkData': {},
-                        'initLinksTimestamp': []
+                        'initLinksTimestamp': [],
+                        'lastCachedLocation': '',
+                        'lastCachedTemp': '',
+                        'lastCachedWeatherCode': 0
                     };
 
                 ProductiveData = cache;
@@ -544,14 +547,17 @@ $(document).ready(function() {
             var location = city + ', ' + region;
             $('#location').html(location);
 
+            ProductiveData['lastCachedLocation'] = location;
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
             // Change App ID
             var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
 
             $.getJSON(weatherAPI, function(json) {
                 var date = new Date();
                 var hour = date.getHours();
-                var kelvinTemp = json.main.temp;
-                var celsiusTemp = Math.round((kelvinTemp - 273).toFixed(2));
+                var kelvinTemp = Math.round(json.main.temp);
+                var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
                 var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
                 var weatherCode = json.weather[0].id;
                 var weatherIcon = '';
@@ -620,10 +626,15 @@ $(document).ready(function() {
                     weatherIcon = '<span class="pe-7w-compass pe-3x pe-va"></span>';
                 }
 
+                ProductiveData['lastCachedTemp'] = kelvinTemp;
+                ProductiveData['lastCachedWeatherCode'] = weatherCode;
+
                 if (ProductiveData['defaultTempUnits'] == 'C') {
                     $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
-                } else {
+                } else if (ProductiveData['defaultTempUnits'] == 'F') {
                     $('#weather').html(fahrenTemp + '&deg;F&nbsp;' + weatherIcon);
+                } else if (ProductiveData['defaultTempUnits'] == 'K') {
+                    $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
 
             });
@@ -641,6 +652,7 @@ $(document).ready(function() {
         $('.option-close').css('display', 'none');
         $('.option-section-container').fadeOut();
         $('#option-save-title').css('display', 'none');
+        location.reload();
     });
 
 

@@ -7,6 +7,7 @@ const TIME_12_HR = 1;
 const TIME_12_HR_AMPM = 2;
 const TIME_24_HR = 3;
 const TIME_24_HR_AMPM = 4;
+const KELVIN_CELSIUS_DIFF = 273;
 
 
 // Success
