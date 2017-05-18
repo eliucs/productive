@@ -256,45 +256,77 @@ $(document).ready(function() {
     });
 
 
-    /*
     $('#add-task-bar').keypress(function(e){
-        // Triggers Google Search on 'Enter' key pressed
         if (e.which == KEY_ENTER) {
-            var searchText = $('#search-bar').val();
-            searchText = encodeURIComponent(searchText.toLowerCase());
+            var timestamp = Date.now();
+            var taskText = $(this).val();
 
-            if (searchText) {
-                var urlPattern = /^(https?:\/\/)?[^ ]+[.][^ ]+([.][^ ]+)*(\/[^ ]+)?$/i;
+            if (taskText) {
+                $('#empty-tasks').css('display', 'none');
 
-                console.log(SUCCESS_SEARCH + searchText);
+                var html = '';
 
-                // Test if URL
-                if (urlPattern.test(searchText)) {
-                    // Navigate to URL
-                    nav(searchText);
-                }
-                else {
-                    var isQuickAccess = false;
-                    // Check if searchText is a quick acess
-                    for (var property in ProductiveData['linkData']) {
-                        if (ProductiveData['linkData'].hasOwnProperty(property) &&
-                            ProductiveData['linkData'][property]['title'].toLowerCase() == searchText.toLowerCase()) {
-                            isQuickAccess = true;
-                            nav(ProductiveData['linkData'][property]['url']);
-                        }
+                html += '<div class="row task-item-row"><div class="col-md-12"><div class="input-group">';
+                html += '<input type="text" class="form-control tasks-item" value="' + taskText + '" disabled>';
+                html += '<span class="input-group-btn">';
+                html += '<button class="btn btn-default task-complete-button" type="button" data-timestamp="' + timestamp + '"><i class="fa fa-check" aria-hidden="true"></i></button>';
+                html += '<button class="btn btn-default task-delete-button" type="button" data-timestamp="' + timestamp + '"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                html += '</span></div></div></div>';
+
+                $('#tasks-items-area').append(html);
+                $('#add-task-form')[0].reset();
+
+                timestamp = String(timestamp);
+
+                ProductiveData['taskData'][timestamp] = {
+                    'text': taskText
+                };
+
+                ProductiveData['totalTasksCreated']++;
+                ProductiveData['numTasks']++;
+                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+
+                $('.task-complete-button[data-timestamp="' + timestamp + '"]').click(function() {
+                    $(this).prop('disabled', 'true');
+                    $(this).css('cursor', 'default');
+                    $(this).parent().parent().parent().parent().fadeOut();
+
+                    delete ProductiveData['taskData'][timestamp];
+
+                    ProductiveData['totalTasksCompleted']++;
+                    ProductiveData['numTasks']--;
+
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                    if (ProductiveData['numTasks'] === 0) {
+                        $('#empty-tasks').fadeIn();
+                    } else {
+                        $('#empty-tasks').fadeOut();
                     }
-                    if (!isQuickAccess) {
-                        window.location.href = URL_GOOGLE + searchText;
+                });
+
+                $('.task-delete-button[data-timestamp="' + timestamp + '"]').click(function() {
+                    $(this).prop('disabled', 'true');
+                    $(this).css('cursor', 'default');
+                    $(this).parent().parent().parent().parent().fadeOut();
+
+                    delete ProductiveData['taskData'][timestamp];
+
+                    ProductiveData['totalTasksDeleted']++;
+                    ProductiveData['numTasks']--;
+
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                    if (ProductiveData['numTasks'] === 0) {
+                        $('#empty-tasks').fadeIn();
+                    } else {
+                        $('#empty-tasks').fadeOut();
                     }
-                }
-            } else {
-                console.log(ERROR_SEARCH);
+                });
             }
         }
-    });*/
-
-
-
+    });
 
 
     // Notes Tab and Section
