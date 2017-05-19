@@ -648,7 +648,7 @@ html, body {
 .info-area-container {
     height: 9999em;
     background-color: #000;
-    opacity: 0.75;
+    opacity: 0.87;
     overflow-y: hidden;
     width: 100%;
 }
@@ -699,6 +699,29 @@ html, body {
     font-weight: 100;
     font-style: normal;
     font-size: 2.5em;
+    color: #222;
+    text-align: center;
+}
+
+.info-modal-text {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
+    color: #222;
+    text-align: left;
+}
+
+.info-modal-footer {
+    padding-bottom: 0.75em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
     color: #222;
     text-align: center;
 }
