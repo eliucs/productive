@@ -65,7 +65,7 @@ html, body {
 }
 
 .bg-title:hover {
-    color: #e1e1e1 !important;
+    color: #2a93c3 !important;
 }
 
 .main-container {
@@ -632,4 +632,73 @@ html, body {
     color: #008000;
     text-align: center;
     display: none;
+}
+
+
+/* Info Modal */
+.info-section-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 99;
+    display: block;
+}
+
+.info-area-container {
+    height: 9999em;
+    background-color: #000;
+    opacity: 0.75;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.info-close-container {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    z-index: 999;
+}
+
+.info-close {
+    font-size: 2em;
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.info-close:hover {
+    color: rgba(81, 203, 238, 1) !important;
+}
+
+.info-title {
+    margin-top: 0.5em;
+    margin-bottom: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 5em;
+    color: #fff;
+    text-align: center;
+}
+
+.info-modal-container {
+    margin-top: 10em;
+}
+
+.info-modal {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 1em;
+}
+
+.info-modal-title {
+    padding-top: 0.75em;
+    margin-bottom: 0.1em;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2.5em;
+    color: #222;
+    text-align: center;
 }
