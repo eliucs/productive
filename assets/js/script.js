@@ -28,6 +28,7 @@ $(document).ready(function() {
                         'numLinks': 0,
                         'linkData': {},
                         'initLinksTimestamp': [],
+                        'lastImageUpdate': Date.now(),
                         'lastCachedLocation': '',
                         'lastCachedTemp': KELVIN_CELSIUS_DIFF,
                         'lastCachedWeatherCode': 0
@@ -41,6 +42,35 @@ $(document).ready(function() {
             console.log(ERROR_LOCAL_STORAGE);
         }
     })();
+
+
+    // Background Image with Flickr API
+    var FlickrAPIKey = '840ad7eca0abe3a19ca841bf407a93e4';
+
+    $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=1&format=json&nojsoncallback=1',
+        function(json) {
+            console.log(json);
+
+            var farmId = json.photos.photo[0].farm;
+            var id = json.photos.photo[0].id;
+            var secret = json.photos.photo[0].secret;
+            var server = json.photos.photo[0].server;
+            var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
+
+            $('.main-container').css('background-image', 'url("' + url + '")');
+
+            console.log(url);
+    }).fail(function() {
+        $('.main-container').css('background-image', 'url("../img/wp.jpg")');
+    });
+
+
+
+
+
+
+
+
 
 
     // Search Bar
