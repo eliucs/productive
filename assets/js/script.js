@@ -49,7 +49,6 @@ $(document).ready(function() {
     // Background Image with Flickr API
     var FlickrAPIKey = '840ad7eca0abe3a19ca841bf407a93e4';
 
-
     (function updateBackgroundImage() {
         var lastImageUpdate = parseInt(ProductiveData['lastImageUpdate']);
         var currentTime = parseInt(Date.now());
@@ -60,6 +59,7 @@ $(document).ready(function() {
 
             $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
                 function(json) {
+
                     var timestamp = Date.now();
                     var farmId = json.photos.photo[hourIndex].farm;
                     var id = json.photos.photo[hourIndex].id;
@@ -76,42 +76,26 @@ $(document).ready(function() {
                     ProductiveData['lastCachedImageUrl'] = url;
                     ProductiveData['lastCachedImageTitle'] = title;
                     localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                    $('.main-container').addClass('bg-image');
+
                 }).fail(function() {
                 $('.main-container').addClass('bg-image');
             });
 
         } else {
-            $('.main-container').css('background-image', 'url("' + ProductiveData['lastCachedImageUrl'] + '")');
-            var html = '<a class="bg-title" href="' + ProductiveData['lastCachedImageUrl'] + '">' +
-                ProductiveData['lastCachedImageTitle'] + '</a>';
-            $('#bg-title').html(html);
+            // Load default background image if no cached image
+            if (!ProductiveData['lastCachedImageUrl'] ||
+                !ProductiveData['lastImageUpdate'] ||
+                !ProductiveData['lastCachedImageTitle']) {
+                $('.main-container').addClass('bg-image');
+            } else {
+                $('.main-container').css('background-image', 'url("' + ProductiveData['lastCachedImageUrl'] + '")');
+                var html = '<a class="bg-title" href="' + ProductiveData['lastCachedImageUrl'] + '">' +
+                    ProductiveData['lastCachedImageTitle'] + '</a>';
+                $('#bg-title').html(html);
+            }
         }
     })();
-
-
-    /*
-    $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=1&format=json&nojsoncallback=1',
-        function(json) {
-            console.log(json);
-
-            var timestamp = Date.now();
-            var farmId = json.photos.photo[0].farm;
-            var id = json.photos.photo[0].id;
-            var secret = json.photos.photo[0].secret;
-            var server = json.photos.photo[0].server;
-            var title = json.photos.photo[0].title;
-            var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
-
-            $('.main-container').css('background-image', 'url("' + url + '")');
-            var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
-            $('#bg-title').html(html);
-
-            ProductiveData['lastImageUpdate'] = timestamp;
-            ProductiveData['lastCachedImageUrl'] = url;
-            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-    }).fail(function() {
-        $('.main-container').addClass('bg-image');
-    });*/
 
 
     // Search Bar
@@ -784,7 +768,7 @@ $(document).ready(function() {
         return Math.round(1.8 * temp + 32);
     }
 
-    function getWeatherIcon(weatherCode) {
+    function getWeatherIcon(weatherCode, hour) {
         var weatherIcon = '';
 
         if ((weatherCode >= 200 && weatherCode <= 202) ||
@@ -858,6 +842,7 @@ $(document).ready(function() {
         var ipAPI = 'http://ip-api.com/json';
 
         $.getJSON(ipAPI, function(json) {
+
             var latitude = json.lat;
             var longitude = json.lon;
             var city = json.city;
@@ -872,13 +857,14 @@ $(document).ready(function() {
             var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
 
             $.getJSON(weatherAPI, function(json) {
+
                 var date = new Date();
                 var hour = date.getHours();
                 var kelvinTemp = Math.round(json.main.temp);
                 var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
                 var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
                 var weatherCode = json.weather[0].id;
-                var weatherIcon = getWeatherIcon(weatherCode);
+                var weatherIcon = getWeatherIcon(weatherCode, hour);
 
                 ProductiveData['lastCachedTemp'] = kelvinTemp;
                 ProductiveData['lastCachedWeatherCode'] = weatherCode;
@@ -893,13 +879,16 @@ $(document).ready(function() {
                 }
             });
         }).fail(function() {
+            var date = new Date();
+            var hour = date.getHours();
+
             console.log(ERROR_LOCATION);
             $('#location').html(ProductiveData['lastCachedLocation']);
 
             var kelvinTemp = ProductiveData['lastCachedTemp'];
             var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
             var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
-            var weatherIcon = getWeatherIcon(ProductiveData['lastCachedWeatherCode']);
+            var weatherIcon = getWeatherIcon(ProductiveData['lastCachedWeatherCode'], hour);
 
             if (ProductiveData['defaultTempUnits'] == 'C') {
                 $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
@@ -922,7 +911,7 @@ $(document).ready(function() {
         $('.option-close').css('display', 'none');
         $('.option-section-container').fadeOut();
         $('#option-save-title').css('display', 'none');
-        location.reload();
+        // Refresh Page
     });
 
 
@@ -949,13 +938,12 @@ $(document).ready(function() {
         }
 
         localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-
         $('#option-save-title').fadeIn();
     });
 
     $('#option-reset').click(function() {
        localStorage.clear();
-       location.reload();
+       // Refresh Page
     });
 
 });
