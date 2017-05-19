@@ -29,6 +29,8 @@ $(document).ready(function() {
                         'linkData': {},
                         'initLinksTimestamp': [],
                         'lastImageUpdate': Date.now(),
+                        'lastCachedImageTitle': '',
+                        'lastCachedImageUrl': '',
                         'lastCachedLocation': '',
                         'lastCachedTemp': KELVIN_CELSIUS_DIFF,
                         'lastCachedWeatherCode': 0
@@ -47,28 +49,69 @@ $(document).ready(function() {
     // Background Image with Flickr API
     var FlickrAPIKey = '840ad7eca0abe3a19ca841bf407a93e4';
 
+
+    (function updateBackgroundImage() {
+        var lastImageUpdate = parseInt(ProductiveData['lastImageUpdate']);
+        var currentTime = parseInt(Date.now());
+
+        if ((currentTime - lastImageUpdate) > MS_IN_HR) {
+            var time = new Date();
+            var hourIndex = time.getHours();
+
+            $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
+                function(json) {
+                    var timestamp = Date.now();
+                    var farmId = json.photos.photo[hourIndex].farm;
+                    var id = json.photos.photo[hourIndex].id;
+                    var secret = json.photos.photo[hourIndex].secret;
+                    var server = json.photos.photo[hourIndex].server;
+                    var title = json.photos.photo[hourIndex].title;
+                    var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
+
+                    $('.main-container').css('background-image', 'url("' + url + '")');
+                    var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
+                    $('#bg-title').html(html);
+
+                    ProductiveData['lastImageUpdate'] = timestamp;
+                    ProductiveData['lastCachedImageUrl'] = url;
+                    ProductiveData['lastCachedImageTitle'] = title;
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                }).fail(function() {
+                $('.main-container').addClass('bg-image');
+            });
+
+        } else {
+            $('.main-container').css('background-image', 'url("' + ProductiveData['lastCachedImageUrl'] + '")');
+            var html = '<a class="bg-title" href="' + ProductiveData['lastCachedImageUrl'] + '">' +
+                ProductiveData['lastCachedImageTitle'] + '</a>';
+            $('#bg-title').html(html);
+        }
+    })();
+
+
+    /*
     $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=1&format=json&nojsoncallback=1',
         function(json) {
             console.log(json);
 
+            var timestamp = Date.now();
             var farmId = json.photos.photo[0].farm;
             var id = json.photos.photo[0].id;
             var secret = json.photos.photo[0].secret;
             var server = json.photos.photo[0].server;
+            var title = json.photos.photo[0].title;
             var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
 
             $('.main-container').css('background-image', 'url("' + url + '")');
+            var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
+            $('#bg-title').html(html);
+
+            ProductiveData['lastImageUpdate'] = timestamp;
+            ProductiveData['lastCachedImageUrl'] = url;
+            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
     }).fail(function() {
         $('.main-container').addClass('bg-image');
-    });
-
-
-
-
-
-
-
-
+    });*/
 
 
     // Search Bar
