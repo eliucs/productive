@@ -741,7 +741,7 @@ $(document).ready(function() {
     })();
 
 
-    $('#time').dblclick(function() {
+    $('#time').click(function() {
         if (ProductiveData['defaultTimeFormat'] == TIME_12_HR) {
             ProductiveData['defaultTimeFormat'] = TIME_24_HR;
         } else if (ProductiveData['defaultTimeFormat'] == TIME_24_HR) {
@@ -922,8 +922,7 @@ $(document).ready(function() {
     })();
 
 
-    $('#location').dblclick(function() {
-
+    $('#location').click(function() {
         var text = $('#location').html();
 
         if (text == ProductiveData['lastCachedLocation']) {
