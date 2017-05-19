@@ -359,6 +359,7 @@ html, body {
     font-style: normal;
     font-size: 5em;
     color: #fff;
+    cursor: pointer;
 }
 
 .date-container {
@@ -642,7 +643,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     z-index: 99;
-    display: block;
+    display: none;
 }
 
 .info-area-container {

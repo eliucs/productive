@@ -740,6 +740,19 @@ $(document).ready(function() {
     })();
 
 
+    $('#time').dblclick(function() {
+        if (ProductiveData['defaultTimeFormat'] == TIME_12_HR) {
+            ProductiveData['defaultTimeFormat'] = TIME_24_HR;
+        } else if (ProductiveData['defaultTimeFormat'] == TIME_24_HR) {
+            ProductiveData['defaultTimeFormat'] = TIME_12_HR;
+        } else if (ProductiveData['defaultTimeFormat'] == TIME_12_HR_AMPM) {
+            ProductiveData['defaultTimeFormat'] = TIME_24_HR_AMPM;
+        } else {
+            ProductiveData['defaultTimeFormat'] = TIME_12_HR_AMPM;
+        }
+    });
+
+
     (function updateDate() {
         var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',' Thursday',
             'Friday', 'Saturday'];
@@ -861,6 +874,8 @@ $(document).ready(function() {
 
             $.getJSON(weatherAPI, function(json) {
 
+                console.log(json);
+
                 var date = new Date();
                 var hour = date.getHours();
                 var kelvinTemp = Math.round(json.main.temp);
@@ -962,7 +977,6 @@ $(document).ready(function() {
         $('.info-close').css('display', 'none');
         $('.info-section-container').fadeOut();
     });
-
 
 
 });
