@@ -32,6 +32,7 @@ $(document).ready(function() {
                         'lastCachedImageTitle': '',
                         'lastCachedImageUrl': '',
                         'lastCachedLocation': '',
+                        'lastCachedCoordinates': '',
                         'lastCachedTemp': KELVIN_CELSIUS_DIFF,
                         'lastCachedWeatherCode': 0
                     };
@@ -864,9 +865,11 @@ $(document).ready(function() {
             var city = json.city;
             var region = json.region;
             var location = city + ', ' + region;
+            var coordinates = latitude + ', ' + longitude;
             $('#location').html(location);
 
             ProductiveData['lastCachedLocation'] = location;
+            ProductiveData['lastCachedCoordinates'] = coordinates;
             localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
             // Change App ID
@@ -917,6 +920,18 @@ $(document).ready(function() {
             }
         });
     })();
+
+
+    $('#location').dblclick(function() {
+
+        var text = $('#location').html();
+
+        if (text == ProductiveData['lastCachedLocation']) {
+            $(this).html(ProductiveData['lastCachedCoordinates']);
+        } else {
+            $(this).html(ProductiveData['lastCachedLocation']);
+        }
+    });
 
 
     $('#option-open').click(function() {
