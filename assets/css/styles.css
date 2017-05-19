@@ -39,6 +39,10 @@ html, body {
     }
 }
 
+.bg-image {
+    background-image: url('../img/wp.jpg');
+}
+
 .main-container {
     position: fixed;
     margin: 0;

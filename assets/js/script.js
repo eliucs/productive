@@ -58,10 +58,8 @@ $(document).ready(function() {
             var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
 
             $('.main-container').css('background-image', 'url("' + url + '")');
-
-            console.log(url);
     }).fail(function() {
-        $('.main-container').css('background-image', 'url("../img/wp.jpg")');
+        $('.main-container').addClass('bg-image');
     });
 
 
@@ -838,7 +836,6 @@ $(document).ready(function() {
                 var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
                 var weatherCode = json.weather[0].id;
                 var weatherIcon = getWeatherIcon(weatherCode);
-                console.log(weatherCode);
 
                 ProductiveData['lastCachedTemp'] = kelvinTemp;
                 ProductiveData['lastCachedWeatherCode'] = weatherCode;
