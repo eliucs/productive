@@ -34,7 +34,10 @@ $(document).ready(function() {
                         'lastCachedLocation': '',
                         'lastCachedCoordinates': '',
                         'lastCachedTemp': KELVIN_CELSIUS_DIFF,
-                        'lastCachedWeatherCode': 0
+                        'lastCachedWeatherCode': 0,
+                        'lastCachedHumidity': '',
+                        'lastCachedPressure': '',
+                        'lastCachedWindSpeed': ''
                     };
 
                 ProductiveData = cache;
@@ -977,6 +980,9 @@ $(document).ready(function() {
 
                 ProductiveData['lastCachedTemp'] = kelvinTemp;
                 ProductiveData['lastCachedWeatherCode'] = weatherCode;
+                ProductiveData['lastCachedHumidity'] = humidity;
+                ProductiveData['lastCachedPressure'] = pressure;
+                ProductiveData['lastCachedWindSpeed'] = windSpeed;
                 localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
                 if (ProductiveData['defaultTempUnits'] == 'C') {
@@ -986,6 +992,10 @@ $(document).ready(function() {
                 } else if (ProductiveData['defaultTempUnits'] == 'K') {
                     $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
+
+                $('#humidity').html(humidity + '&#37;');
+                $('#pressure').html(pressure + '&nbsp;hpa');
+                $('#wind-speed').html(windSpeed + '&nbsp;m/s');
             });
         }).fail(function() {
             var date = new Date();
@@ -1006,6 +1016,10 @@ $(document).ready(function() {
             } else if (ProductiveData['defaultTempUnits'] == 'K') {
                 $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
             }
+
+            $('#humidity').html(ProductiveData['lastCachedHumidity']);
+            $('#pressure').html(ProductiveData['lastCachedPressure']);
+            $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
         });
     })();
 
