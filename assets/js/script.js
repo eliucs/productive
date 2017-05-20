@@ -951,41 +951,96 @@ $(document).ready(function() {
     (function updateWeather() {
         var ipAPI = 'http://ip-api.com/json';
 
-        $.getJSON(ipAPI, function(json) {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: ipAPI,
+            timeout: 2000,
+            success: function(json) {
+                var latitude = json.lat;
+                var longitude = json.lon;
+                var city = json.city;
+                var region = json.region;
+                var coordinates = latitude + ', ' + longitude;
+                var location = city + ', ' + region;
+                $('#location').html(location);
 
-            var latitude = json.lat;
-            var longitude = json.lon;
-            var city = json.city;
-            var region = json.region;
-            var location = city + ', ' + region;
-            var coordinates = latitude + ', ' + longitude;
-            $('#location').html(location);
+                ProductiveData['lastCachedLocation'] = location;
+                ProductiveData['lastCachedCoordinates'] = coordinates;
+                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
 
-            ProductiveData['lastCachedLocation'] = location;
-            ProductiveData['lastCachedCoordinates'] = coordinates;
-            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
 
-            // Change App ID
-            var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: weatherAPI,
+                    timeout: 5000,
+                    success: function(json) {
 
-            $.getJSON(weatherAPI, function(json) {
+                        var date = new Date();
+                        var hour = date.getHours();
+                        var kelvinTemp = Math.round(json.main.temp);
+                        var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
+                        var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
+                        var weatherCode = json.weather[0].id;
+                        var weatherIcon = getWeatherIcon(weatherCode, hour);
+                        var humidity = json.main.humidity;
+                        var pressure = json.main.pressure;
+                        var windSpeed = json.wind.speed;
+
+                        ProductiveData['lastCachedTemp'] = kelvinTemp;
+                        ProductiveData['lastCachedWeatherCode'] = weatherCode;
+                        ProductiveData['lastCachedHumidity'] = humidity;
+                        ProductiveData['lastCachedPressure'] = pressure;
+                        ProductiveData['lastCachedWindSpeed'] = windSpeed;
+                        localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+
+                        if (ProductiveData['defaultTempUnits'] == 'C') {
+                            $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
+                        } else if (ProductiveData['defaultTempUnits'] == 'F') {
+                            $('#weather').html(fahrenTemp + '&deg;F&nbsp;' + weatherIcon);
+                        } else if (ProductiveData['defaultTempUnits'] == 'K') {
+                            $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
+                        }
+
+                        console.log(json);
+
+                        $('#humidity').html(humidity + '&#37;');
+                        $('#pressure').html(pressure + '&nbsp;hpa');
+                        $('#wind-speed').html(windSpeed + '&nbsp;m/s');
+                    },
+                    error: function() {
+                        var date = new Date();
+                        var hour = date.getHours();
+
+                        var kelvinTemp = ProductiveData['lastCachedTemp'];
+                        var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
+                        var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
+                        var weatherIcon = getWeatherIcon(ProductiveData['lastCachedWeatherCode'], hour);
+
+                        if (ProductiveData['defaultTempUnits'] == 'C') {
+                            $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
+                        } else if (ProductiveData['defaultTempUnits'] == 'F') {
+                            $('#weather').html(fahrenTemp + '&deg;F&nbsp;' + weatherIcon);
+                        } else if (ProductiveData['defaultTempUnits'] == 'K') {
+                            $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
+                        }
+
+                        $('#humidity').html(ProductiveData['lastCachedHumidity']);
+                        $('#pressure').html(ProductiveData['lastCachedPressure']);
+                        $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
+                    }
+                });
+            },
+            error: function() {
                 var date = new Date();
                 var hour = date.getHours();
-                var kelvinTemp = Math.round(json.main.temp);
+
+                var kelvinTemp = ProductiveData['lastCachedTemp'];
                 var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
                 var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
-                var weatherCode = json.weather[0].id;
-                var weatherIcon = getWeatherIcon(weatherCode, hour);
-                var humidity = json.main.humidity;
-                var pressure = json.main.pressure;
-                var windSpeed = json.wind.speed;
-
-                ProductiveData['lastCachedTemp'] = kelvinTemp;
-                ProductiveData['lastCachedWeatherCode'] = weatherCode;
-                ProductiveData['lastCachedHumidity'] = humidity;
-                ProductiveData['lastCachedPressure'] = pressure;
-                ProductiveData['lastCachedWindSpeed'] = windSpeed;
-                localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                var weatherIcon = getWeatherIcon(ProductiveData['lastCachedWeatherCode'], hour);
 
                 if (ProductiveData['defaultTempUnits'] == 'C') {
                     $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
@@ -995,35 +1050,13 @@ $(document).ready(function() {
                     $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
 
-                console.log(json);
+                $('#humidity').html(ProductiveData['lastCachedHumidity']);
+                $('#pressure').html(ProductiveData['lastCachedPressure']);
+                $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
 
-                $('#humidity').html(humidity + '&#37;');
-                $('#pressure').html(pressure + '&nbsp;hpa');
-                $('#wind-speed').html(windSpeed + '&nbsp;m/s');
-            });
-        }).fail(function() {
-            var date = new Date();
-            var hour = date.getHours();
-
-            console.log(ERROR_LOCATION);
-            $('#location').html(ProductiveData['lastCachedLocation']);
-
-            var kelvinTemp = ProductiveData['lastCachedTemp'];
-            var celsiusTemp = kelvinTemp - KELVIN_CELSIUS_DIFF;
-            var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
-            var weatherIcon = getWeatherIcon(ProductiveData['lastCachedWeatherCode'], hour);
-
-            if (ProductiveData['defaultTempUnits'] == 'C') {
-                $('#weather').html(celsiusTemp + '&deg;C&nbsp;' + weatherIcon);
-            } else if (ProductiveData['defaultTempUnits'] == 'F') {
-                $('#weather').html(fahrenTemp + '&deg;F&nbsp;' + weatherIcon);
-            } else if (ProductiveData['defaultTempUnits'] == 'K') {
-                $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
+                console.log(ERROR_LOCATION);
+                $('#location').html(ProductiveData['lastCachedLocation']);
             }
-
-            $('#humidity').html(ProductiveData['lastCachedHumidity']);
-            $('#pressure').html(ProductiveData['lastCachedPressure']);
-            $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
         });
     })();
 
