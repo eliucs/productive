@@ -54,34 +54,53 @@ $(document).ready(function() {
         var lastImageUpdate = parseInt(ProductiveData['lastImageUpdate']);
         var currentTime = parseInt(Date.now());
 
-        if ((currentTime - lastImageUpdate) > MS_IN_HR |
-            !lastImageUpdate) {
+        if (Math.abs(currentTime - lastImageUpdate) > MS_IN_HR) {
             var time = new Date();
-            var hourIndex = time.getHours();
+            var hour = time.getHours();
 
             $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
                 function(json) {
-
-                    var timestamp = Date.now();
-                    var farmId = json.photos.photo[hourIndex].farm;
-                    var id = json.photos.photo[hourIndex].id;
-                    var secret = json.photos.photo[hourIndex].secret;
-                    var server = json.photos.photo[hourIndex].server;
-                    var title = json.photos.photo[hourIndex].title;
+                    var farmId = json.photos.photo[hour].farm;
+                    var id = json.photos.photo[hour].id;
+                    var secret = json.photos.photo[hour].secret;
+                    var server = json.photos.photo[hour].server;
+                    var title = json.photos.photo[hour].title;
                     var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
 
+                    $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
+                        function(json) {
+                            var timestamp = Date.now();
+                            var farmId = json.photos.photo[hourIndex].farm;
+                            var id = json.photos.photo[hourIndex].id;
+                            var secret = json.photos.photo[hourIndex].secret;
+                            var server = json.photos.photo[hourIndex].server;
+                            var title = json.photos.photo[hourIndex].title;
+                            var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
+
+                            $('.main-container').removeClass('.bg-image');
+                            $('.main-container').css('background-image', 'url("' + url + '")');
+                            var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
+                            $('#bg-title').html(html);
+
+                            ProductiveData['lastImageUpdate'] = timestamp;
+                            ProductiveData['lastCachedImageUrl'] = url;
+                            ProductiveData['lastCachedImageTitle'] = title;
+                            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                            $('.main-container').addClass('bg-image');
+                        }).fail(function() {
+                        $('.main-container').addClass('bg-image');
+                    });
                     $('.main-container').css('background-image', 'url("' + url + '")');
                     var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
                     $('#bg-title').html(html);
 
-                    ProductiveData['lastImageUpdate'] = timestamp;
+                    ProductiveData['lastImageUpdate'] = Date.now();
                     ProductiveData['lastCachedImageUrl'] = url;
                     ProductiveData['lastCachedImageTitle'] = title;
                     localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-                    $('.main-container').addClass('bg-image');
 
                 }).fail(function() {
-                    $('.main-container').addClass('bg-image');
+                $('.main-container').addClass('bg-image');
             });
 
         } else {
@@ -854,6 +873,72 @@ $(document).ready(function() {
     }
 
 
+    function getWeatherText(weatherCode, hour) {
+
+        if ((weatherCode >= 200 && weatherCode <= 202) ||
+            (weatherCode >= 230 && weatherCode <= 232)) {
+            // Thunderstorm with rain
+            return WEATHER_TXT_THUNDERSTORM_RAIN;
+        } else if (weatherCode >= 211 && weatherCode <= 221) {
+            // Thunderstorm
+            return WEATHER_TXT_THUNDERSTORM;
+        } else if (weatherCode >= 300 && weatherCode <= 321) {
+            // Drizzle
+            return WEATHER_TXT_DRIZZLE;
+        } else if (weatherCode >= 500 && weatherCode <= 531) {
+            // Rain
+            return WEATHER_TXT_RAIN;
+        } else if (weatherCode >= 600 && weatherCode <= 612) {
+            // Snow
+            return WEATHER_TXT_SNOW;
+        } else if (weatherCode >= 615 && weatherCode <= 622) {
+            // Snow with rain
+            return WEATHER_TXT_SNOW_RAIN;
+        } else if (weatherCode >= 700 && weatherCode <= 771) {
+            // Fog
+            return WEATHER_TXT_FOG;
+        } else if (weatherCode === 781 || weatherCode === 900 ||
+            weatherCode === 901 || weatherCode === 902) {
+            // Tornado
+            return WEATHER_TXT_TORNADO;
+        } else if (weatherCode === 800 &&
+            (hour >= 8 && hour <= 17)) {
+            // Clear sun
+            return WEATHER_TXT_CLEAR_DAY;
+        } else if (weatherCode === 800) {
+            // Clear moon
+            return WEATHER_TXT_CLEAR_NIGHT;
+        } else if (weatherCode >= 801 && weatherCode <= 804) {
+            // Cloudy
+            return WEATHER_TXT_CLOUDY;
+        } else if (weatherCode === 903) {
+            // Cold
+            return WEATHER_TXT_COLD;
+        } else if (weatherCode === 904) {
+            // Hot
+            return WEATHER_TXT_HOT;
+        } else if (weatherCode === 905) {
+            // Windy
+            return WEATHER_TXT_WINDY;
+        } else if (weatherCode === 906) {
+            // Hail
+            return WEATHER_TXT_HAIL;
+        } else if (weatherCode >= 951 && weatherCode <= 960) {
+            // Breeze, windy, gale
+            return WEATHER_TXT_BREEZE;
+        } else if (weatherCode === 961) {
+            // Violent storm
+            return WEATHER_TXT_VIOLENT_STORM;
+        } else if (weatherCode === 962) {
+            // Hurricane
+            return WEATHER_TXT_HURICANE;
+        } else {
+            // Error
+            return WEATHER_TXT_ERROR;
+        }
+    }
+
+
     //Location and Weather
     (function updateWeather() {
         var ipAPI = 'http://ip-api.com/json';
@@ -886,6 +971,9 @@ $(document).ready(function() {
                 var fahrenTemp = convertCelsiusToFahrenheit(celsiusTemp);
                 var weatherCode = json.weather[0].id;
                 var weatherIcon = getWeatherIcon(weatherCode, hour);
+                var humidity = json.main.humidity;
+                var pressure = json.main.pressure;
+                var windSpeed = json.wind.speed;
 
                 ProductiveData['lastCachedTemp'] = kelvinTemp;
                 ProductiveData['lastCachedWeatherCode'] = weatherCode;
@@ -934,6 +1022,11 @@ $(document).ready(function() {
 
 
     $('#weather').click(function() {
+        var date = new Date();
+        var hour = date.getHours();
+        var weatherText = getWeatherText(ProductiveData['lastCachedWeatherCode'], hour);
+
+        $('#weather-more-text').html(weatherText);
         $('.weather-more-container').toggle('.open');
     });
 

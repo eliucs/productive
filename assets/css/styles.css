@@ -735,7 +735,7 @@ html, body {
     font-style: normal;
     font-size: 1.25em;
     color: #222;
-    text-align: left;
+    text-align: justify;
 }
 
 .info-modal-footer {
@@ -755,7 +755,7 @@ html, body {
     bottom: 11em;
     right: 9.5em;
     height: 10em;
-    width: 22em;
+    width: 24em;
     background-color: #000;
     opacity: 0.75;
     border-radius: 1em;
@@ -767,8 +767,11 @@ html, body {
     display: block;
 }
 
+.weather-more-title-row {
+    margin-top: 0.75em;
+}
+
 .weather-more-title {
-    margin-top: 1em;
     position: relative;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
@@ -778,13 +781,28 @@ html, body {
     text-align: center;
 }
 
+.weather-more-item-row {
+    margin-top: 0em;
+}
+
 .weather-more-item {
-    margin-top: 0.5em;
-    position: relative;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
     font-style: normal;
-    font-size: 2.5em;
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.weather-more-text-row {
+    margin-top: 0.5em;
+}
+
+.weather-more-text {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2em;
     color: #fff;
     text-align: center;
 }
