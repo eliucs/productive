@@ -975,7 +975,7 @@ $(document).ready(function() {
                     type: 'GET',
                     dataType: 'json',
                     url: weatherAPI,
-                    timeout: 5000,
+                    timeout: 2000,
                     success: function(json) {
 
                         var date = new Date();
@@ -1062,9 +1062,7 @@ $(document).ready(function() {
 
 
     $('#location').click(function() {
-        var text = $('#location').html();
-
-        if (text == ProductiveData['lastCachedLocation']) {
+        if ($(this).html() == ProductiveData['lastCachedLocation']) {
             $(this).html(ProductiveData['lastCachedCoordinates']);
         } else {
             $(this).html(ProductiveData['lastCachedLocation']);
