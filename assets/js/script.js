@@ -28,7 +28,7 @@ $(document).ready(function() {
                         'numLinks': 0,
                         'linkData': {},
                         'initLinksTimestamp': [],
-                        'lastImageUpdate': Date.now(),
+                        'lastImageUpdate': 0,
                         'lastCachedImageTitle': '',
                         'lastCachedImageUrl': '',
                         'lastCachedLocation': '',
@@ -89,7 +89,6 @@ $(document).ready(function() {
                             ProductiveData['lastCachedImageUrl'] = url;
                             ProductiveData['lastCachedImageTitle'] = title;
                             localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-                            $('.main-container').addClass('bg-image');
                         }).fail(function() {
                         $('.main-container').addClass('bg-image');
                     });
@@ -1050,6 +1049,7 @@ $(document).ready(function() {
 
 
     $('#option-open').click(function() {
+        $('.weather-more-container').slideUp('.open');
         $('.option-close').css('display', 'block');
         $('.option-section-container').fadeIn();
     });
@@ -1098,6 +1098,7 @@ $(document).ready(function() {
 
     // Info Modal
     $('#info-open').click(function() {
+        $('.weather-more-container').slideUp('.open');
         $('.info-close').css('display', 'block');
         $('.info-section-container').fadeIn();
     });
