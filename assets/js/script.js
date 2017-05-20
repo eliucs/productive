@@ -61,6 +61,43 @@ $(document).ready(function() {
             var time = new Date();
             var hour = time.getHours();
 
+            var FlickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1';
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: FlickrAPI,
+                timeout: 2000,
+                success: function(json) {
+                    var farmId = json.photos.photo[hour].farm;
+                    var id = json.photos.photo[hour].id;
+                    var secret = json.photos.photo[hour].secret;
+                    var server = json.photos.photo[hour].server;
+                    var title = json.photos.photo[hour].title;
+                    var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
+
+                    $('.main-container').removeClass('.bg-image');
+                    $('.main-container').css('background-image', 'url("' + url + '")');
+                    var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
+                    $('#bg-title').html(html);
+
+                    ProductiveData['lastImageUpdate'] = Date.now();
+                    ProductiveData['lastCachedImageUrl'] = url;
+                    ProductiveData['lastCachedImageTitle'] = title;
+                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                },
+                error: function() {
+                    $('.main-container').addClass('bg-image');
+                }
+
+
+
+
+            });
+
+
+
+            /*
             $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
                 function(json) {
                     var farmId = json.photos.photo[hour].farm;
@@ -92,6 +129,7 @@ $(document).ready(function() {
                         }).fail(function() {
                         $('.main-container').addClass('bg-image');
                     });
+
                     $('.main-container').css('background-image', 'url("' + url + '")');
                     var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
                     $('#bg-title').html(html);
@@ -104,6 +142,8 @@ $(document).ready(function() {
                 }).fail(function() {
                 $('.main-container').addClass('bg-image');
             });
+            */
+
 
         } else {
             // Load default background image if no cached image
@@ -425,6 +465,7 @@ $(document).ready(function() {
         $('#analytics-container').hide();
     });
 
+
     (function initializeNotes() {
         var notes = ProductiveData['noteText'];
 
@@ -432,6 +473,7 @@ $(document).ready(function() {
             $('.notes-area').html(notes);
         }
     })();
+
 
     $('.notes-area').keydown(function(e) {
         ProductiveData['noteText'] = $('.notes-area').val();
@@ -548,6 +590,7 @@ $(document).ready(function() {
            }
         });
     })();
+
 
     $('#link-button').click(function() {
 
@@ -764,7 +807,7 @@ $(document).ready(function() {
 
         time = setTimeout(function () {
             updateTime();
-        }, 500);
+        }, 100);
     })();
 
 
@@ -811,6 +854,7 @@ $(document).ready(function() {
     function convertCelsiusToFahrenheit(temp) {
         return Math.round(1.8 * temp + 32);
     }
+
 
     function getWeatherIcon(weatherCode, hour) {
         var weatherIcon = '';
@@ -882,7 +926,6 @@ $(document).ready(function() {
 
 
     function getWeatherText(weatherCode, hour) {
-
         if ((weatherCode >= 200 && weatherCode <= 202) ||
             (weatherCode >= 230 && weatherCode <= 232)) {
             // Thunderstorm with rain
@@ -977,7 +1020,6 @@ $(document).ready(function() {
                     url: weatherAPI,
                     timeout: 2000,
                     success: function(json) {
-
                         var date = new Date();
                         var hour = date.getHours();
                         var kelvinTemp = Math.round(json.main.temp);
@@ -1003,8 +1045,6 @@ $(document).ready(function() {
                         } else if (ProductiveData['defaultTempUnits'] == 'K') {
                             $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                         }
-
-                        console.log(json);
 
                         $('#humidity').html(humidity + '&#37;');
                         $('#pressure').html(pressure + '&nbsp;hpa');
@@ -1082,7 +1122,6 @@ $(document).ready(function() {
         } else {
             $('.weather-more-container').slideUp('.open');
         }
-
     });
 
 
