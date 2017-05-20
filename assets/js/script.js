@@ -510,6 +510,7 @@ $(document).ready(function() {
 
 
     $('#manage-open').click(function() {
+        $('.weather-more-container').slideUp('.open');
         $('.manage-close').css('display', 'block');
         $('.manage-container').fadeIn();
     });
@@ -964,9 +965,6 @@ $(document).ready(function() {
             var weatherAPI = 'http://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=ab942a3cfd636ab43addb4fb159c7d7a';
 
             $.getJSON(weatherAPI, function(json) {
-
-                console.log(json);
-
                 var date = new Date();
                 var hour = date.getHours();
                 var kelvinTemp = Math.round(json.main.temp);
@@ -1041,7 +1039,13 @@ $(document).ready(function() {
         var weatherText = getWeatherText(ProductiveData['lastCachedWeatherCode'], hour);
 
         $('#weather-more-text').html(weatherText);
-        $('.weather-more-container').toggle('.open');
+
+        if (!$('.weather-more-container').is(':visible')) {
+            $('.weather-more-container').slideDown('.open');
+        } else {
+            $('.weather-more-container').slideUp('.open');
+        }
+
     });
 
 
@@ -1103,6 +1107,5 @@ $(document).ready(function() {
         $('.info-close').css('display', 'none');
         $('.info-section-container').fadeOut();
     });
-
 
 });

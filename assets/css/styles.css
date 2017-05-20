@@ -414,7 +414,7 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    z-index: 99;
+    z-index: 9999 !important;
     display: none;
 }
 
