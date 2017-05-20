@@ -57,7 +57,7 @@ $(document).ready(function() {
         var lastImageUpdate = parseInt(ProductiveData['lastImageUpdate']);
         var currentTime = parseInt(Date.now());
 
-        if (Math.abs(currentTime - lastImageUpdate) > 0) {
+        if (Math.abs(currentTime - lastImageUpdate) > MS_IN_HR) {
             var time = new Date();
             var hour = time.getHours();
             var FlickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1';
@@ -1080,7 +1080,7 @@ $(document).ready(function() {
         $('.option-close').css('display', 'none');
         $('.option-section-container').fadeOut();
         $('#option-save-title').css('display', 'none');
-        // Refresh Page
+        window.location.href = 'index.html';
     });
 
 
@@ -1112,8 +1112,18 @@ $(document).ready(function() {
 
 
     $('#option-reset').click(function() {
-       localStorage.clear();
-       location = location;
+        ProductiveData['totalTasksCreated'] = 0;
+        ProductiveData['totalTasksCompleted'] = 0;
+        ProductiveData['totalTasksDeleted'] = 0;
+        ProductiveData['initTasksTimestamp'] = [];
+        ProductiveData['initLinksTimestamp'] = [];
+        ProductiveData['noteText'] = '';
+        ProductiveData['numLinks'] = 0;
+        ProductiveData['numTasks'] = 0;
+        ProductiveData['linkData'] = {};
+        ProductiveData['taskData'] = {};
+        localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+        window.location.href = 'index.html';
     });
 
 
