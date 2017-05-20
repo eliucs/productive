@@ -57,10 +57,9 @@ $(document).ready(function() {
         var lastImageUpdate = parseInt(ProductiveData['lastImageUpdate']);
         var currentTime = parseInt(Date.now());
 
-        if (Math.abs(currentTime - lastImageUpdate) > MS_IN_HR) {
+        if (Math.abs(currentTime - lastImageUpdate) > 0) {
             var time = new Date();
             var hour = time.getHours();
-
             var FlickrAPI = 'https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1';
 
             $.ajax({
@@ -89,62 +88,7 @@ $(document).ready(function() {
                 error: function() {
                     $('.main-container').addClass('bg-image');
                 }
-
-
-
-
             });
-
-
-
-            /*
-            $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
-                function(json) {
-                    var farmId = json.photos.photo[hour].farm;
-                    var id = json.photos.photo[hour].id;
-                    var secret = json.photos.photo[hour].secret;
-                    var server = json.photos.photo[hour].server;
-                    var title = json.photos.photo[hour].title;
-                    var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
-
-                    $.getJSON('https://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=' + FlickrAPIKey + '&per_page=24&format=json&nojsoncallback=1',
-                        function(json) {
-                            var timestamp = Date.now();
-                            var farmId = json.photos.photo[hourIndex].farm;
-                            var id = json.photos.photo[hourIndex].id;
-                            var secret = json.photos.photo[hourIndex].secret;
-                            var server = json.photos.photo[hourIndex].server;
-                            var title = json.photos.photo[hourIndex].title;
-                            var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
-
-                            $('.main-container').removeClass('.bg-image');
-                            $('.main-container').css('background-image', 'url("' + url + '")');
-                            var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
-                            $('#bg-title').html(html);
-
-                            ProductiveData['lastImageUpdate'] = timestamp;
-                            ProductiveData['lastCachedImageUrl'] = url;
-                            ProductiveData['lastCachedImageTitle'] = title;
-                            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-                        }).fail(function() {
-                        $('.main-container').addClass('bg-image');
-                    });
-
-                    $('.main-container').css('background-image', 'url("' + url + '")');
-                    var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
-                    $('#bg-title').html(html);
-
-                    ProductiveData['lastImageUpdate'] = Date.now();
-                    ProductiveData['lastCachedImageUrl'] = url;
-                    ProductiveData['lastCachedImageTitle'] = title;
-                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
-
-                }).fail(function() {
-                $('.main-container').addClass('bg-image');
-            });
-            */
-
-
         } else {
             // Load default background image if no cached image
             if (!ProductiveData['lastCachedImageUrl'] ||
