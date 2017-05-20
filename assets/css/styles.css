@@ -577,7 +577,6 @@ html, body {
     display: inline;
 }
 
-/* Option Section Container */
 .option-section-container {
     margin: 0;
     padding: 0;
@@ -662,8 +661,6 @@ html, body {
     display: none;
 }
 
-
-/* Info Modal */
 .info-section-container {
     margin: 0;
     padding: 0;
@@ -754,8 +751,6 @@ html, body {
     text-align: center;
 }
 
-
-/* Weather More */
 .weather-more-container {
     position: fixed;
     bottom: 11em;
