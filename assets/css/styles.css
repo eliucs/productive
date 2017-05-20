@@ -100,6 +100,12 @@ html, body {
     border-radius: 1em !important;
 }
 
+.search-bar::placeholder,
+.search-bar:placeholder-shown,
+.search-bar::-webkit-input-placeholder {
+    color: #ddd;
+}
+
 .task-title {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-weight: 100;
