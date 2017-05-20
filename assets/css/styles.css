@@ -29,6 +29,10 @@ html, body {
     .weather-location-container {
         display: none;
     }
+
+    .weather-more-container {
+        display: none !important;
+    }
 }
 
 @media all and (max-width: 1040px) {
@@ -741,5 +745,46 @@ html, body {
     font-style: normal;
     font-size: 1.25em;
     color: #222;
+    text-align: center;
+}
+
+
+/* Weather More */
+.weather-more-container {
+    position: fixed;
+    bottom: 11em;
+    right: 9.5em;
+    height: 10em;
+    width: 22em;
+    background-color: #000;
+    opacity: 0.75;
+    border-radius: 1em;
+    text-align: center;
+    display: none;
+}
+
+.open {
+    display: block;
+}
+
+.weather-more-title {
+    margin-top: 1em;
+    position: relative;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 1.25em;
+    color: #fff;
+    text-align: center;
+}
+
+.weather-more-item {
+    margin-top: 0.5em;
+    position: relative;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 2.5em;
+    color: #fff;
     text-align: center;
 }

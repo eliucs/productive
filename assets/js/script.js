@@ -933,6 +933,11 @@ $(document).ready(function() {
     });
 
 
+    $('#weather').click(function() {
+        $('.weather-more-container').toggle('.open');
+    });
+
+
     $('#option-open').click(function() {
         $('.option-close').css('display', 'block');
         $('.option-section-container').fadeIn();
