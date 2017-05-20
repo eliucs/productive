@@ -336,7 +336,7 @@ $(document).ready(function() {
     });
 
 
-    $('#add-task-bar').keypress(function(e){
+    $('#add-task-bar').keypress(function(e) {
         if (e.which == KEY_ENTER) {
             var timestamp = Date.now();
             var taskText = $(this).val();
@@ -404,7 +404,10 @@ $(document).ready(function() {
                         $('#empty-tasks').fadeOut();
                     }
                 });
+
             }
+
+            return false;
         }
     });
 
@@ -725,6 +728,8 @@ $(document).ready(function() {
                 $('#link-error').css('display', 'block');
                 console.log(ERROR_NEW_LINK);
             }
+
+            return false;
         }
     });
 
@@ -989,6 +994,8 @@ $(document).ready(function() {
                 } else if (ProductiveData['defaultTempUnits'] == 'K') {
                     $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
+
+                console.log(json);
 
                 $('#humidity').html(humidity + '&#37;');
                 $('#pressure').html(pressure + '&nbsp;hpa');
