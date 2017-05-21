@@ -1011,9 +1011,9 @@ $(document).ready(function() {
                             $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                         }
 
-                        $('#humidity').html(ProductiveData['lastCachedHumidity']);
-                        $('#pressure').html(ProductiveData['lastCachedPressure']);
-                        $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
+                        $('#humidity').html(ProductiveData['lastCachedHumidity'] + '&#37;');
+                        $('#pressure').html(ProductiveData['lastCachedPressure'] + '&nbsp;hpa');
+                        $('#wind-speed').html(ProductiveData['lastCachedWindSpeed'] + '&nbsp;m/s');
                     }
                 });
             },
@@ -1034,9 +1034,9 @@ $(document).ready(function() {
                     $('#weather').html(kelvinTemp + 'K&nbsp;' + weatherIcon);
                 }
 
-                $('#humidity').html(ProductiveData['lastCachedHumidity']);
-                $('#pressure').html(ProductiveData['lastCachedPressure']);
-                $('#wind-speed').html(ProductiveData['lastCachedWindSpeed']);
+                $('#humidity').html(ProductiveData['lastCachedHumidity'] + '&#37;');
+                $('#pressure').html(ProductiveData['lastCachedPressure'] + '&nbsp;hpa');
+                $('#wind-speed').html(ProductiveData['lastCachedWindSpeed'] + '&nbsp;m/s');
 
                 console.log(ERROR_LOCATION);
                 $('#location').html(ProductiveData['lastCachedLocation']);

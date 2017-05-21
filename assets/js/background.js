@@ -89,5 +89,4 @@ function archiveThread(id){
 
 function gmailAPILoaded() {
 
-
 }
