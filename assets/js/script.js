@@ -75,15 +75,33 @@ $(document).ready(function() {
                     var title = json.photos.photo[hour].title;
                     var url = 'https://farm' + farmId + '.staticflickr.com/' + server + '/' + id + '_' + secret + '_h.jpg';
 
-                    $('.main-container').removeClass('.bg-image');
-                    $('.main-container').css('background-image', 'url("' + url + '")');
-                    var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
-                    $('#bg-title').html(html);
+                    // Handle broken links by loading last valid image
+                    var xhr;
+                    var _orgAjax = $.ajaxSettings.xhr;
+                    $.ajaxSettings.xhr = function () {
+                        xhr = _orgAjax();
+                        return xhr;
+                    };
 
-                    ProductiveData['lastImageUpdate'] = Date.now();
-                    ProductiveData['lastCachedImageUrl'] = url;
-                    ProductiveData['lastCachedImageTitle'] = title;
-                    localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                    $.ajax(url, {
+                        success: function(response) {
+                            $('.main-container').removeClass('.bg-image');
+                            $('.main-container').css('background-image', 'url("' + url + '")');
+                            var html = '<a class="bg-title" href="' + url + '">' + title + '</a>';
+                            $('#bg-title').html(html);
+
+                            ProductiveData['lastImageUpdate'] = Date.now();
+                            ProductiveData['lastCachedImageUrl'] = url;
+                            ProductiveData['lastCachedImageTitle'] = title;
+                            localStorage['ProductiveData'] = JSON.stringify(ProductiveData);
+                        },
+                        error: function(response) {
+                            $('.main-container').css('background-image', 'url("' + ProductiveData['lastCachedImageUrl'] + '")');
+                            var html = '<a class="bg-title" href="' + ProductiveData['lastCachedImageUrl'] + '">' +
+                                ProductiveData['lastCachedImageTitle'] + '</a>';
+                            $('#bg-title').html(html);
+                        }
+                    });
                 },
                 error: function() {
                     $('.main-container').addClass('bg-image');
