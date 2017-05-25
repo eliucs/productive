@@ -563,6 +563,12 @@ $(document).ready(function() {
         var title = $('#link-title').val();
         var desc = $('#link-desc').val();
 
+        var incorrectUrl = url.search(new RegExp(/^http:\/\//i));
+
+        if (incorrectUrl) {
+            url = 'http://' + url;
+        }
+
         if (url && title && desc) {
             if (numLinks === MAX_NUM_LINKS) {
                 $('#link-error').css('display', 'none');
