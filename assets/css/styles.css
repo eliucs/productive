@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400');
+
 *:focus {
     outline: none !important;
 }
@@ -35,15 +37,21 @@ html, body {
     }
 }
 
-@media all and (max-width: 1040px) {
+@media all and (max-width: 1130px) {
     .task-title {
         font-size: 1.35em !important;
     }
 }
 
+@media all and (max-width: 1055px) {
+    .task-title {
+        font-size: 1.2em !important;
+    }
+}
+
 @media all and (max-width: 435px) {
     .task-title {
-        font-size: 1.25em !important;
+        font-size: 1em !important;
     }
 }
 
@@ -54,7 +62,8 @@ html, body {
 .bg-title {
     margin-top: 1em;
     padding: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
+    /*font-family: "Roboto", sans-serif;*/
     font-weight: 100;
     font-style: normal;
     font-size: 1em;
@@ -92,7 +101,7 @@ html, body {
 .search-bar {
     padding: 1em;
     background-color: transparent;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -107,7 +116,7 @@ html, body {
 }
 
 .task-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -150,7 +159,7 @@ html, body {
 .empty-notifications-title {
     margin-top: 0.5em;
     margin-left: 0.5em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 2em;
@@ -170,7 +179,7 @@ html, body {
 }
 
 .empty-tasks-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 2em;
@@ -187,7 +196,7 @@ html, body {
 }
 
 .add-task-bar {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1em;
@@ -214,7 +223,7 @@ html, body {
     margin: 0.5em;
     width: 97%;
     height: 21em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1em;
@@ -235,7 +244,7 @@ html, body {
 .analytics-item-title {
     margin-top: 0.5em;
     margin-left: 0.5em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.75em;
@@ -246,7 +255,7 @@ html, body {
     padding-left: 1em;
     margin-top: 0.5em;
     margin-left: 0.5em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 2em;
@@ -259,7 +268,7 @@ html, body {
 
 .empty-links {
     padding-top: 1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 3em;
@@ -271,7 +280,7 @@ html, body {
 }
 
 .access-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -281,7 +290,7 @@ html, body {
 .access-add-button {
     margin-top: 1em;
     padding: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -324,7 +333,7 @@ html, body {
 }
 
 .access-item-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 1em;
@@ -332,7 +341,7 @@ html, body {
 }
 
 .access-item-desc {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1em;
@@ -364,7 +373,7 @@ html, body {
 }
 
 .time-container {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 5em;
@@ -378,7 +387,7 @@ html, body {
 }
 
 .date-container {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -386,7 +395,7 @@ html, body {
 }
 
 .weather-container {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 3em;
@@ -401,7 +410,7 @@ html, body {
 }
 
 .location-container {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 2em;
@@ -440,7 +449,7 @@ html, body {
 .manage-title {
     margin-top: 0.5em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 5em;
@@ -467,7 +476,7 @@ html, body {
 
 .link-error {
     margin-bottom: 1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -478,7 +487,7 @@ html, body {
 
 .manage-error {
     margin-bottom: 1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -489,7 +498,7 @@ html, body {
 
 .url-error {
     margin-bottom: 1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -509,7 +518,7 @@ html, body {
 }
 
 .new-link-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.3em;
@@ -518,7 +527,7 @@ html, body {
 }
 
 .new-link-bar {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -528,7 +537,7 @@ html, body {
 .new-link-button {
     padding-left: 2em;
     padding-right: 2em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -536,7 +545,7 @@ html, body {
 }
 
 .current-links-title {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -546,7 +555,7 @@ html, body {
 
 .empty-current-links-title {
     margin-top: 1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -569,7 +578,7 @@ html, body {
 }
 
 .current-links-item {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -617,7 +626,7 @@ html, body {
 .option-title {
     margin-top: 0.5em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 5em;
@@ -629,7 +638,7 @@ html, body {
     margin-right: 0.5em;
     margin-top: 0.1em;
     margin-bottom: 0.25em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -641,7 +650,7 @@ html, body {
     min-width: 7em;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -652,7 +661,7 @@ html, body {
 .option-save {
     margin-top: 0.1em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 200;
     font-style: normal;
     font-size: 1.5em;
@@ -698,7 +707,7 @@ html, body {
 .info-title {
     margin-top: 0.5em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 5em;
@@ -720,7 +729,7 @@ html, body {
 .info-modal-title {
     padding-top: 0.75em;
     margin-bottom: 0.1em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 2.5em;
@@ -733,7 +742,7 @@ html, body {
     padding-right: 1em !important;
     margin-top: 1em;
     margin-bottom: 2em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -743,7 +752,7 @@ html, body {
 
 .info-modal-footer {
     padding-bottom: 0.75em;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -774,7 +783,7 @@ html, body {
 
 .weather-more-title {
     position: relative;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.25em;
@@ -787,7 +796,7 @@ html, body {
 }
 
 .weather-more-item {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 1.5em;
@@ -800,7 +809,7 @@ html, body {
 }
 
 .weather-more-text {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 100;
     font-style: normal;
     font-size: 2em;
